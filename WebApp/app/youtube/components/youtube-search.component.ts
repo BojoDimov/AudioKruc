@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { SearchItem, YouTubeSearchResult } from "../youtube-search.barrel";
-
-
+import { AudioItem, FetchService, SessionService } from '../../infrastructure/infrastructure.barrel';
 
 @Component({
   selector: 'ak-youtube-search',
@@ -15,11 +15,20 @@ export class YoutubeSearchComponent {
   private key = 'AIzaSyDkRjFtuYxaQDimnmELKD-CVqg5GWzSKao';
   items: SearchItem[] = [];
 
-  constructor(private http: HttpClient
+  constructor(
+    private http: HttpClient,
+    private fetchService: FetchService,
+    private session: SessionService
   ) { }
 
   add(item: SearchItem) {
     console.log('Fetching auidio from backend');
+    this.fetchService.fetch(item.id.videoId)
+      .then(res => this.session.addSong({
+        name: item.snippet.title,
+        buffer: res,
+        key: item.id.videoId
+      }));
   }
 
   search() {

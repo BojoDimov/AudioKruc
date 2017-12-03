@@ -1,6 +1,6 @@
 export class SearchItem {
   id: {
-    videoId: number
+    videoId: string
   };
   snippet: {
     title: string,
