@@ -1,0 +1,9 @@
+<div>
+  <input [(ngModel)]="pattern" type="text" class="form-control" />
+  <!-- <button class="btn btn-default" (click)="add()">Add song</button> -->
+  <button class="btn btn-default" (click)="search()">Search</button>
+</div>
+<div *ngFor='let item of items' (click)="add(item)" style="cursor: pointer">
+  <h3>{{item.snippet.title}}</h3>
+  <img src="{{item.snippet.thumbnails.default.url}}" />
+</div>
