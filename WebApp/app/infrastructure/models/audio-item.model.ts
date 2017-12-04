@@ -1,5 +1,5 @@
 export class AudioItem {
   name: string;
-  buffer: ArrayBuffer;
+  buffer: AudioBuffer;
   key: string;
 }

@@ -9,5 +9,6 @@ export class SessionService {
   addSong(song: AudioItem) {
     console.log(song);
     this.songs.push(song);
+    return song;
   }
 } 

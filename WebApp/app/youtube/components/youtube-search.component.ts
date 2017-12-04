@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { SearchItem, YouTubeSearchResult } from "../youtube-search.barrel";
-import { AudioItem, FetchService, SessionService } from '../../infrastructure/infrastructure.barrel';
+import { AudioItem, FetchService, SessionService, PlayerService } from '../../infrastructure/infrastructure.barrel';
 
 @Component({
   selector: 'ak-youtube-search',
@@ -18,17 +18,19 @@ export class YoutubeSearchComponent {
   constructor(
     private http: HttpClient,
     private fetchService: FetchService,
-    private session: SessionService
+    private session: SessionService,
+    private player: PlayerService
   ) { }
 
   add(item: SearchItem) {
-    console.log('Fetching auidio from backend');
     this.fetchService.fetch(item.id.videoId)
-      .then(res => this.session.addSong({
+      .then(rawBuffer => this.player.decode(rawBuffer))
+      .then(audioBuffer => this.session.addSong({
         name: item.snippet.title,
-        buffer: res,
+        buffer: audioBuffer,
         key: item.id.videoId
-      }));
+      }))
+      .then(song => this.player.play(song));
   }
 
   search() {
