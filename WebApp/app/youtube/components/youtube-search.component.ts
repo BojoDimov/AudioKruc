@@ -12,7 +12,7 @@ import { AudioItem, FetchService, SessionService, PlayerService } from '../../in
 export class YoutubeSearchComponent {
   pattern: string = null;
   private url = 'https://www.googleapis.com/youtube/v3/search?';
-  private key = 'AIzaSyDkRjFtuYxaQDimnmELKD-CVqg5GWzSKao';
+  private key = 'AIzaSyDkRjFtuYxaQDimnmELKD-CVqg5GWzSKao';// this is youtube api key
   items: SearchItem[] = [];
 
   constructor(
