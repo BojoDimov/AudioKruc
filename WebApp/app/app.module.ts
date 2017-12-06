@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { YoutubeModule } from './youtube/youtube-search.module';
 import { AppComponent } from './app.component';
+import { TestComponent } from './test.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { AppComponent } from './app.component';
     YoutubeModule
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    TestComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

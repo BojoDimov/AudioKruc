@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import {
   FetchService,
+  SocketFetchService,
   SessionService,
   PlayerService
 } from './infrastructure.barrel';
@@ -11,7 +12,7 @@ import {
     HttpClientModule
   ],
   providers: [
-    FetchService,
+    { provide: FetchService, useClass: SocketFetchService },
     SessionService,
     PlayerService
   ]
