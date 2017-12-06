@@ -4,7 +4,8 @@ import {
   FetchService,
   SocketFetchService,
   SessionService,
-  PlayerService
+  PlayerService,
+  AudioStreamService
 } from './infrastructure.barrel';
 
 @NgModule({
@@ -13,6 +14,7 @@ import {
   ],
   providers: [
     { provide: FetchService, useClass: SocketFetchService },
+    AudioStreamService,
     SessionService,
     PlayerService
   ]
