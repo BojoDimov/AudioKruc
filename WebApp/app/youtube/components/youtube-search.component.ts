@@ -23,26 +23,10 @@ export class YoutubeSearchComponent {
     private audioStream: AudioStreamService
   ) { }
 
-  // add(item: SearchItem) {
-  //   this.fetchService.fetch(item.id.videoId)
-  //     .then(rawBuffer => this.player.decode(rawBuffer))
-  //     .then(audioBuffer => this.session.addSong({
-  //       name: item.snippet.title,
-  //       buffer: audioBuffer,
-  //       key: item.id.videoId
-  //     }))
-  //     .then(song => this.player.play(song));
-  // }
-
   add(item: SearchItem) {
-    this.audioStream.fetch(item.id.videoId)
-      //.then(rawBuffer => this.player.decode(rawBuffer))
-      .then(audioBuffer => this.session.addSong({
-        name: item.snippet.title,
-        buffer: audioBuffer,
-        key: item.id.videoId
-      }))
+    this.audioStream.fetch(item.snippet.title, item.id.videoId)
       .then(song => this.player.play(song));
+    //.then(song => this.player.play(song));
   }
 
   search() {

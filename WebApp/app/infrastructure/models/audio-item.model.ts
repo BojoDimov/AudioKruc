@@ -1,5 +1,5 @@
 export class AudioItem {
   name: string;
-  buffer: AudioBuffer;
+  node: AudioBufferSourceNode;
   key: string;
 }

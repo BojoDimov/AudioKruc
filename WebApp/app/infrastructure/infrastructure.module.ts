@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import {
   FetchService,
-  SocketFetchService,
   SessionService,
   PlayerService,
   AudioStreamService
@@ -13,10 +12,10 @@ import {
     HttpClientModule
   ],
   providers: [
-    { provide: FetchService, useClass: SocketFetchService },
-    AudioStreamService,
+    FetchService,
     SessionService,
-    PlayerService
+    PlayerService,
+    AudioStreamService
   ]
 })
 export class InfrastructureModule { }

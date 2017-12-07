@@ -20,3 +20,19 @@ Application for listening music online.
 * Implementation of user accounts
 * Integration with Google Auth
 * Audio rooms - multiple users can queue songs
+
+
+## Functionality updates
+### Update 0 (-no date-)
+**Implemented:** Youtube search and simple play of one song using the backend and web audio api
+
+**Status:** Completed.
+
+### Update 1 (7.12.2017)
+**Implemented:** websocket streaming using socket.io and web-audio-stream (`AudioStreamService` and `Server/soc-serv.js`). 
+
+**Result:** Not working as AudioContext.decodeAudioData cannot decode any frame except the first one because only the first one contains the needed decoding header. 
+
+**Status:** Dropped. 
+
+**Additional:** Songs will be transfered as 'whole' raw data. After that they are decoded again as whole. If everything else is ready can try to implement streaming with ffmpeg.

@@ -19,9 +19,7 @@ export class PlayerService {
   }
 
   play(song: AudioItem) {
-    this.source = this.audioContext.createBufferSource();
-    this.source.buffer = song.buffer;
-    this.source.connect(this.audioContext.destination);
-    this.source.start(0);
+    song.node.connect(this.audioContext.destination);
+    song.node.start(0);
   }
 }
