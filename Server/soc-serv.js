@@ -13,6 +13,7 @@ function downloadSong(socket, songRequestData) {
   if (song) {
     console.log('resolved without downloading');
     socket.emit('receiveSongChunk:' + songRequestData.key, song.buffer);
+    return;
   }
 
   let stream = ytdl(songRequestData.key, { filter: "audioonly" });
