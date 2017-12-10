@@ -1,12 +1,20 @@
 let io = require('socket.io')(12909);
 const ytdl = require('ytdl-core');
 
+let songs = [];
+
 io.on('connection', (socket) => {
   console.log('Successfully connected to localhost:12909');
   socket.on('requestSong', data => downloadSong(socket, data));
 });
 
 function downloadSong(socket, songRequestData) {
+  let song = songs.find(song => song.key == songRequestData.key);
+  if (song) {
+    console.log('resolved without downloading');
+    socket.emit('receiveSongChunk:' + songRequestData.key, song.buffer);
+  }
+
   let stream = ytdl(songRequestData.key, { filter: "audioonly" });
   let bufferList = [];
 
@@ -18,6 +26,9 @@ function downloadSong(socket, songRequestData) {
   stream.on('data', buffer => bufferList.push(buffer));
 
   stream.on('finish', () => {
-    socket.emit('receiveSongChunk:' + songRequestData.key, Buffer.concat(bufferList));
+    console.log('finished downloading');
+    let buffer = Buffer.concat(bufferList);
+    songs.push({ key: songRequestData.key, buffer: buffer });
+    socket.emit('receiveSongChunk:' + songRequestData.key, buffer);
   });
 }

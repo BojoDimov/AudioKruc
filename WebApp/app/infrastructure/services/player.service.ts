@@ -18,8 +18,23 @@ export class PlayerService {
     return this.audioContext.decodeAudioData(buffer);
   }
 
-  play(song: AudioItem) {
-    song.node.connect(this.audioContext.destination);
-    song.node.start(0);
+  play(audioBuffer: AudioBuffer) {
+    this.clearSource();
+    this.source = this.audioContext.createBufferSource();
+    this.source.connect(this.audioContext.destination);
+    this.source.buffer = audioBuffer;
+    this.source.start(0);
+  }
+
+  private clearSource() {
+    try {
+      this.source.stop()
+    }
+    catch (e) {
+
+    }
+    finally {
+      this.source = null;
+    }
   }
 }
