@@ -8,6 +8,10 @@ export class SessionService {
   songs: AudioItem[] = [];
   socket = io('http://localhost:12909');
 
+  defaults = {
+    volume: 60
+  };
+
   addSong(song: AudioItem) {
     console.log(song);
     this.songs.push(song);

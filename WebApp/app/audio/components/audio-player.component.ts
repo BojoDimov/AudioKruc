@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PlayerService } from '../../infrastructure/services/player.service';
+import { PlayerService, SessionService } from '../../infrastructure/infrastructure.barrel';
 import * as $ from 'jquery';
 
 @Component({
@@ -7,12 +7,13 @@ import * as $ from 'jquery';
   templateUrl: './audio-player.component.html'
 })
 export class AudioPlayerComponent {
-  progress = 50;
+  progress = 0;
+  volume = 0;
   ticker = null;
-  hideProgress = false;
 
   constructor(
-    private playerService: PlayerService
+    public playerService: PlayerService,
+    public session: SessionService
   ) {
     this.ticker = setInterval(this.tick.bind(this), 100);
     const self = this;
@@ -26,5 +27,9 @@ export class AudioPlayerComponent {
 
   tick() {
     this.progress = this.playerService.calculateProgress() * 100;
+  }
+
+  volumeChange(e) {
+    this.playerService.volume(e.value);
   }
 }

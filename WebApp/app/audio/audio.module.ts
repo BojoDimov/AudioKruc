@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatProgressBarModule, MatSliderModule } from '@angular/material';
+import { MatProgressBarModule, MatSliderModule, MatIconModule } from '@angular/material';
 import { AudioPlayerComponent } from './audio.barrel';
 
 @NgModule({
-  imports: [BrowserModule,
+  imports: [
+    BrowserModule,
     MatProgressBarModule,
-    MatSliderModule
+    MatSliderModule,
+    MatIconModule
   ],
   declarations: [
     AudioPlayerComponent

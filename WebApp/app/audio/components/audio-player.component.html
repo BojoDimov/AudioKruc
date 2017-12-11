@@ -1,9 +1,19 @@
 <style>
   #progress {
     cursor: pointer;
+    height: 1.25em;
   }
 </style>
-<div style="margin: 1em 0;">
-  <mat-progress-bar id="progress" color="green" mode="determinate" [value]="progress" style="height: 1.3em;" *ngIf="progress > 0">
+<div style="margin: 1em 0;" *ngIf="true">
+  <mat-progress-bar id="progress" color="green" mode="determinate" [value]="progress">
   </mat-progress-bar>
+  <span (click)="this.playerService.resume()" *ngIf="this.playerService.audioContext.state === 'suspended'" class="btn btn-primary btn-xs">Play</span>
+  <span (click)="this.playerService.pause()" *ngIf="this.playerService.audioContext.state === 'running' && this.playerService.flags.active"
+    class="btn btn-primary btn-xs">Pause</span>
+  <span (click)="this.playerService.replay()" *ngIf="this.playerService.flags.finished" class="btn btn-primary btn-xs">Replay</span>
+  <mat-slider min="0" max="100" [thumbLabel]="false" (change)="volumeChange($event)" [value]="session.defaults.volume" step="1"></mat-slider>
 </div>
+
+<!-- *ngIf="this.playerService.isPlaying"
+*ngIf="!this.playerService.isPlaying && this.playerService.isActive"
+*ngIf="this.playerService.isFinished" -->
