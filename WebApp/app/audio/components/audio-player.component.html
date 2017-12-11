@@ -1,7 +1,9 @@
 <style>
-
+  #progress {
+    cursor: pointer;
+  }
 </style>
-<div class="unicorn-dark-theme" style="position: relative; width: 1000px;">
-  <mat-progress-bar color="green" mode="determinate" [value]="progress" style="height: 1.3em;" *ngIf="progress > 0" (click)="seek($event)">
+<div style="margin: 1em 0;">
+  <mat-progress-bar id="progress" color="green" mode="determinate" [value]="progress" style="height: 1.3em;" *ngIf="progress > 0">
   </mat-progress-bar>
 </div>
