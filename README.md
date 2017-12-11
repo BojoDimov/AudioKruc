@@ -36,3 +36,12 @@ Application for listening music online.
 **Status:** Dropped. 
 
 **Additional:** Songs will be transfered as 'whole' raw data. After that they are decoded again as whole. If everything else is ready can try to implement streaming with ffmpeg.
+
+### Update 2 (11.12.2017)
+**Implemented:** progress bar and song seek
+
+**Result:** song is seekable
+
+**Status:** completed
+
+**Additional:** added @angular/material and jQuery
