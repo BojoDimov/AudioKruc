@@ -1,10 +1,13 @@
-<div>
-  <input [(ngModel)]="pattern" type="text" class="form-control" />
-  <!-- <button class="btn btn-default" (click)="add()">Add song</button> -->
-  <button class="btn btn-default" (click)="search()">Search</button>
-</div>
-<div *ngFor='let item of items' style="cursor: pointer">
-  <h3>{{item.snippet.title}}</h3>
-  <img src="{{item.snippet.thumbnails.default.url}}" />
-  <button (click)="add(item)">Add</button>
+<div class="search">
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." [(ngModel)]="pattern">
+    <span class="input-group-btn">
+      <button class="btn btn-secondary" type="button" (click)="search()">Go!</button>
+    </span>
+  </div>
+  <div *ngFor='let item of items' style="cursor: pointer">
+    <h3>{{item.snippet.title}}</h3>
+    <img src="{{item.snippet.thumbnails.default.url}}" />
+    <button (click)="add(item)">Add</button>
+  </div>
 </div>

@@ -1,3 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
-/*@import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+body {
+  font-size: 20px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.search {
+  margin: 1.1em auto;
+  width: 50%;
+}

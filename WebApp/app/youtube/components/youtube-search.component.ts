@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { SearchItem, YouTubeSearchResult } from "../youtube-search.barrel";
@@ -6,7 +6,8 @@ import { AudioItem, FetchService, SessionService, PlayerService, AudioStreamServ
 
 @Component({
   selector: 'ak-youtube-search',
-  templateUrl: './youtube-search.component.html'
+  templateUrl: './youtube-search.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 
 export class YoutubeSearchComponent {
