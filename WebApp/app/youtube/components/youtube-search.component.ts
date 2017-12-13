@@ -27,10 +27,14 @@ export class YoutubeSearchComponent {
   add(item: SearchItem) {
     this.audioStream.fetch(item.snippet.title, item.id.videoId)
       .then(audioBuffer => this.player.play(audioBuffer));
+
+    this.items = [];
     //.then(song => this.player.play(song));
   }
 
   search() {
+    if (!this.pattern)
+      return;
     let query = this.url + 'part=snippet&type=video&q=' + this.pattern.split(' ').join('+') + '&key=' + this.key;
     this.http.get<YouTubeSearchResult>(query)
       .toPromise()

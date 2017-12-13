@@ -15,21 +15,26 @@ export class AudioPlayerComponent {
     public playerService: PlayerService,
     public session: SessionService
   ) {
+    this.volume = session.defaults.volume;
     this.ticker = setInterval(this.tick.bind(this), 100);
-    const self = this;
 
-    $(document).on("click", "#progress", function (e) {
-      let relWidth = e.pageX - $(this).offset().left;
+    $(document).on("click", "#progress-bar", function (e) {
+      let newWidth = e.pageX - $(this).offset().left;
       let totWidth = $(this).width();
-      playerService.seek(relWidth / totWidth);
+      $("#progress").width(newWidth);
+      playerService.seek(newWidth / totWidth);
     });
   }
 
   tick() {
-    this.progress = this.playerService.calculateProgress() * 100;
+    $("#progress").width($("#progress-bar").width() * this.playerService.calculateProgress());
   }
 
-  volumeChange(e) {
-    this.playerService.volume(e.value);
+  showProgress() {
+    return $("#progress").width() <= 0;
+  }
+
+  changeVolume(value) {
+    this.playerService.volume(value);
   }
 }

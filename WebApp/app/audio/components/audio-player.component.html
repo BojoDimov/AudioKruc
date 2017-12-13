@@ -1,20 +1,30 @@
-<style>
-  #progress {
-    cursor: pointer;
-    height: 1.25em;
-  }
+<div class="container-middle" *ngIf="playerService.flags.active">
+  <div id="progress-bar">
+    <div id="progress">
+    </div>
+  </div>
 
-</style>
-<div style="margin: 1em 0;" *ngIf="true">
-  <!-- <mat-progress-bar id="progress" color="green" mode="determinate" [value]="progress">
-  </mat-progress-bar> -->
-  <span (click)="this.playerService.resume()" *ngIf="this.playerService.audioContext.state === 'suspended'" class="btn btn-primary btn-xs">Play</span>
-  <span (click)="this.playerService.pause()" *ngIf="this.playerService.audioContext.state === 'running' && this.playerService.flags.active"
-    class="btn btn-primary btn-xs">Pause</span>
-  <span (click)="this.playerService.replay()" *ngIf="this.playerService.flags.finished" class="btn btn-primary btn-xs">Replay</span>
-  <!-- <mat-slider min="0" max="100" [thumbLabel]="false" (change)="volumeChange($event)" [value]="session.defaults.volume" step="1"></mat-slider> -->
+  <div class="mg-up-down">
+    <span class="cursor text-secondary mg-side">
+      <i class="fa fa-step-backward" aria-hidden="true"></i>
+    </span>
+
+    <span (click)="this.playerService.pause()" *ngIf="this.playerService.audioContext.state === 'running'" class="cursor text-secondary mg-side">
+      <i class="fa fa-pause" aria-hidden="true"></i>
+    </span>
+
+    <span (click)="this.playerService.resume()" *ngIf="this.playerService.audioContext.state === 'suspended'" class="cursor text-secondary mg-side">
+      <i class="fa fa-play" aria-hidden="true"></i>
+    </span>
+
+    <span class="cursor text-secondary mg-side">
+      <i class="fa fa-step-forward" aria-hidden="true"></i>
+    </span>
+
+    <span (click)="this.playerService.replay()" *ngIf="this.playerService.flags.finished" class="btn btn-primary btn-xs">
+      Replay
+    </span>
+
+    <input #volumeRef type="range" min="0" max="150" step="any" [value]="volume" (change)="changeVolume(volumeRef.value)" />
+  </div>
 </div>
-
-<!-- *ngIf="this.playerService.isPlaying"
-*ngIf="!this.playerService.isPlaying && this.playerService.isActive"
-*ngIf="this.playerService.isFinished" -->

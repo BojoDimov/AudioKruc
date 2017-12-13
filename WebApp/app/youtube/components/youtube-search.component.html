@@ -1,8 +1,10 @@
-<div class="search">
+<div class="container-middle">
   <div class="input-group">
     <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." [(ngModel)]="pattern">
     <span class="input-group-btn">
-      <button class="btn btn-secondary" type="button" (click)="search()">Go!</button>
+      <button class="btn btn-secondary cursor" type="button" (click)="search()">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
     </span>
   </div>
   <div *ngFor='let item of items' style="cursor: pointer">

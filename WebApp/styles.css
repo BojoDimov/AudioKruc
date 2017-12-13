@@ -3,9 +3,34 @@
 body {
   font-size: 20px;
   font-family: 'Raleway', sans-serif;
+  background-color: rgba(216, 216, 216, 0.3);
 }
 
-.search {
+.cursor{
+  cursor: pointer;
+}
+
+.mg-up-down {
+  margin: 0.5em 0;
+}
+
+.mg-side {
+  margin: 0 0.5em;
+}
+
+#progress-bar{
+  background-color: rgba(109, 165, 25, 0.20);
+  height: 0.8em;
+  cursor: pointer;
+}
+
+#progress {
+  background-color: rgb(109, 165, 25);
+  width: 0;
+  height: inherit;
+}
+
+.container-middle {
   margin: 1.1em auto;
   width: 50%;
 }
