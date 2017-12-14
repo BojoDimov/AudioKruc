@@ -1,4 +1,8 @@
+<div class="center container-middle" *ngIf="playerService.flags.pending">
+  <i class="fa fa-spinner fa-pulse fa-fw"></i>
+</div>
 <div class="container-middle" *ngIf="playerService.flags.active">
+  <div class="text-secondary">{{session.currentSong.name}}</div>
   <div id="progress-bar">
     <div id="progress">
     </div>

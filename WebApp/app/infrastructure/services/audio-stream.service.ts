@@ -13,6 +13,7 @@ export class AudioStreamService {
   ) { }
 
   fetch(title: string, key: string): Promise<AudioBuffer> {
+    this.player.flags.pending = true;
     return new Promise<AudioBuffer>((resolve, reject) => {
       let audioItem = this.session.songs.find(song => song.key == key);
       if (audioItem) {
@@ -22,7 +23,7 @@ export class AudioStreamService {
       audioItem = new AudioItem();
       audioItem.name = title;
       audioItem.key = key;
-      this.session.songs[this.session.songs.length] = audioItem;
+      this.session.addSong(audioItem, true);
 
       this.session.socket.emit('requestSong', { key: key });
 

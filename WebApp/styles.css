@@ -3,11 +3,15 @@
 body {
   font-size: 20px;
   font-family: 'Raleway', sans-serif;
-  background-color: rgba(216, 216, 216, 0.3);
+  background-color: rgba(136, 136, 136, 0.1);
 }
 
 .cursor{
   cursor: pointer;
+}
+
+.center {
+  text-align: center;
 }
 
 .mg-up-down {
@@ -33,4 +37,24 @@ body {
 .container-middle {
   margin: 1.1em auto;
   width: 50%;
+}
+
+.search-container {
+  float: left;
+  width: 25%;
+  font-size: 75%;
+  margin: 1em 1em;
+}
+
+.search-container div{
+  margin-bottom: 1em;
+}
+
+.search-container img{
+  width: 100px;
+  height: 100px;
+}
+
+.search-container img:hover{
+  opacity: 0.75;
 }

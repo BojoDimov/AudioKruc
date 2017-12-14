@@ -13,7 +13,8 @@ export class PlayerService {
 
   public flags = {
     active: false,
-    finished: false
+    finished: false,
+    pending: false
   };
 
   constructor(
@@ -43,7 +44,8 @@ export class PlayerService {
   initFlags() {
     this.flags = {
       active: true,
-      finished: false
+      finished: false,
+      pending: false
     };
   }
 

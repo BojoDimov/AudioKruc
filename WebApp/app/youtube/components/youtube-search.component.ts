@@ -24,12 +24,13 @@ export class YoutubeSearchComponent {
     private audioStream: AudioStreamService
   ) { }
 
-  add(item: SearchItem) {
+  play(item: SearchItem) {
     this.audioStream.fetch(item.snippet.title, item.id.videoId)
       .then(audioBuffer => this.player.play(audioBuffer));
+  }
 
-    this.items = [];
-    //.then(song => this.player.play(song));
+  add(item: SearchItem) {
+
   }
 
   search() {
