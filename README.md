@@ -21,6 +21,15 @@ Application for listening music online.
 * Integration with Google Auth
 * Audio rooms - multiple users can queue songs
 
+## TODO (lastly updated 14.12.2017)
+- `deploy` the application with port-forwarding and test it on mobile phones
+- custom script for starting the app with ressurecting processes for file-server and backend.
+- google OAuth integration.
+- search playlist from youtube.
+- add whole playlists to queue.
+- integrate with Web File API or IndexedDB
+- save the user state on the client and on the backend (I must choose the suitable Database Storage)
+
 
 ## Functionality updates
 ### Update 0 (-no date-)
@@ -45,3 +54,13 @@ Application for listening music online.
 **Status:** completed
 
 **Additional:** added @angular/material and jQuery
+
+### Update 3 (14.12.2017)
+**Implemented:** all core player functionalities (pause/play/replay, prev/next, seek, volume control) and added quee.
+Layed the foundations of own style without using pre-built components like Angular Material or Ng-Bootstrap (sometimes they are hard to use).
+
+**Result:** the application is fully functional and usable
+
+**Status:** completed
+
+**Additional:** there are some bugs `Angular version mismatch. Expected 4 got 3.` or something like that which fails on the first compile but is good on every recompile after.
