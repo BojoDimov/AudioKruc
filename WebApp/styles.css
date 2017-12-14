@@ -40,8 +40,8 @@ body {
 }
 
 .search-container {
-  float: left;
-  width: 25%;
+  float: right;
+  width: 15%;
   font-size: 75%;
   margin: 1em 1em;
 }

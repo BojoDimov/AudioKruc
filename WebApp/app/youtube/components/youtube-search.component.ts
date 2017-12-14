@@ -26,7 +26,10 @@ export class YoutubeSearchComponent {
 
   play(item: SearchItem) {
     this.audioStream.fetch(item.snippet.title, item.id.videoId)
-      .then(audioBuffer => this.player.play(audioBuffer));
+      .then(audioItem => {
+        this.player.play(audioItem.buffer)
+        this.session.currentSong = audioItem;
+      })
   }
 
   add(item: SearchItem) {

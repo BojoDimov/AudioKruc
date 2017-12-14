@@ -17,6 +17,5 @@ export class SessionService {
 
   addSong(song: AudioItem, immediatePlay = false) {
     this.songs.push(song);
-    this.currentSong = song;
   }
 } 
