@@ -27,7 +27,11 @@ export class AudioPlayerComponent {
   }
 
   tick() {
-    $("#progress").width($("#progress-bar").width() * this.playerService.calculateProgress());
+    let progress = this.playerService.calculateProgress();
+    if (progress < 1)
+      $("#progress").width($("#progress-bar").width() * progress);
+    else
+      this.playerService.notify('end');
   }
 
   showProgress() {
@@ -36,5 +40,22 @@ export class AudioPlayerComponent {
 
   changeVolume(value) {
     this.playerService.volume(value);
+  }
+
+  nextSong() {
+    if (this.session.queueIndex + 1 < this.session.queue.length) {
+      this.session.queueIndex++;
+      this.session.currentSong = this.session.songs[this.session.queue[this.session.queueIndex].index];
+      this.playerService.play(this.session.currentSong.buffer);
+    }
+
+  }
+
+  prevSong() {
+    if (this.session.queueIndex - 1 >= 0) {
+      this.session.queueIndex--;
+      this.session.currentSong = this.session.songs[this.session.queue[this.session.queueIndex].index];
+      this.playerService.play(this.session.currentSong.buffer);
+    }
   }
 }

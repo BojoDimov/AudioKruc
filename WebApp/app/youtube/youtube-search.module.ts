@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { YoutubeSearchComponent } from './youtube-search.barrel';
+import { YoutubeSearchComponent, YoutubeSearchResultComponent } from './youtube-search.barrel';
 
 @NgModule({
   imports: [
@@ -12,10 +12,12 @@ import { YoutubeSearchComponent } from './youtube-search.barrel';
     HttpClientModule
   ],
   declarations: [
-    YoutubeSearchComponent
+    YoutubeSearchComponent,
+    YoutubeSearchResultComponent
   ],
   exports: [
-    YoutubeSearchComponent
+    YoutubeSearchComponent,
+    YoutubeSearchResultComponent
   ]
 })
 export class YoutubeModule { }

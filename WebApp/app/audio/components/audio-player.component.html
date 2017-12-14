@@ -1,4 +1,4 @@
-<div class="center container-middle" *ngIf="playerService.flags.pending">
+<div class="center container-middle" *ngIf="session.pending">
   <i class="fa fa-spinner fa-pulse fa-fw"></i>
 </div>
 <div class="container-middle" *ngIf="playerService.flags.active">
@@ -9,11 +9,12 @@
   </div>
 
   <div class="mg-up-down">
-    <span class="cursor text-secondary mg-side">
+    <span (click)="prevSong()" class="cursor text-secondary mg-side">
       <i class="fa fa-step-backward" aria-hidden="true"></i>
     </span>
 
-    <span (click)="this.playerService.pause()" *ngIf="this.playerService.audioContext.state === 'running'" class="cursor text-secondary mg-side">
+    <span (click)="this.playerService.pause()" *ngIf="this.playerService.audioContext.state === 'running' && !this.playerService.flags.finished"
+      class="cursor text-secondary mg-side">
       <i class="fa fa-pause" aria-hidden="true"></i>
     </span>
 
@@ -21,13 +22,15 @@
       <i class="fa fa-play" aria-hidden="true"></i>
     </span>
 
-    <span class="cursor text-secondary mg-side">
+    <span (click)="this.playerService.replay()" *ngIf="this.playerService.flags.finished" class="cursor text-secondary mg-side">
+      <i class="fa fa-refresh" aria-hidden="true"></i>
+    </span>
+
+    <span (click)="nextSong()" class="cursor text-secondary mg-side">
       <i class="fa fa-step-forward" aria-hidden="true"></i>
     </span>
 
-    <span (click)="this.playerService.replay()" *ngIf="this.playerService.flags.finished" class="btn btn-primary btn-xs">
-      Replay
-    </span>
+
 
     <input #volumeRef type="range" min="0" max="150" step="any" [value]="volume" (change)="changeVolume(volumeRef.value)" />
   </div>

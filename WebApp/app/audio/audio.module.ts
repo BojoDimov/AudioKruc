@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AudioPlayerComponent } from './audio.barrel';
+import { AudioPlayerComponent, AudioQueueComponent } from './audio.barrel';
 
 @NgModule({
   imports: [
     BrowserModule,
   ],
   declarations: [
-    AudioPlayerComponent
+    AudioPlayerComponent,
+    AudioQueueComponent
   ],
   exports: [
-    AudioPlayerComponent
+    AudioPlayerComponent,
+    AudioQueueComponent
   ]
 })
 export class AudioModule { }

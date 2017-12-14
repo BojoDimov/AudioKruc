@@ -1,0 +1,22 @@
+<div class="container-middle" *ngIf="session.ytSearchItems.length > 0">
+  <div class="section-label cursor" (click)="session.showSearchResults = !session.showSearchResults">
+    <span>Search Results</span>
+  </div>
+
+  <div *ngIf="session.showSearchResults" class="container-content">
+    <div *ngFor='let item of session.ytSearchItems'>
+      <img src="{{item.snippet.thumbnails.default.url}}" />
+      <div style="display:inline-block">
+        <span class="fixed-width-span">{{item.snippet.title}}</span>
+        <div>
+          <span (click)="play(item)" class="cursor text-secondary mg-side">
+          <i class="fa fa-play" aria-hidden="true"></i>
+        </span>
+          <span (click)="add(item)" class="cursor text-secondary mg-side">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

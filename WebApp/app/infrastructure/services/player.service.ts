@@ -13,8 +13,7 @@ export class PlayerService {
 
   public flags = {
     active: false,
-    finished: false,
-    pending: false
+    finished: false
   };
 
   constructor(
@@ -44,8 +43,7 @@ export class PlayerService {
   initFlags() {
     this.flags = {
       active: true,
-      finished: false,
-      pending: false
+      finished: false
     };
   }
 
@@ -67,6 +65,13 @@ export class PlayerService {
   resume() {
     if (this.audioContext.state === 'suspended')
       this.audioContext.resume();
+  }
+
+  replay() {
+    if (this.flags.finished) {
+      let buffer = this.source.buffer;
+      this.play(buffer);
+    }
   }
 
   volume(percent: number) {
@@ -100,5 +105,10 @@ export class PlayerService {
     finally {
       this.source = null;
     }
+  }
+
+  notify(event: 'end') {
+    if (this.flags.active)
+      this.flags.finished = true;
   }
 }

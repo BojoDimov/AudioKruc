@@ -18,23 +18,8 @@ export class YoutubeSearchComponent {
 
   constructor(
     private http: HttpClient,
-    private fetchService: FetchService,
     private session: SessionService,
-    private player: PlayerService,
-    private audioStream: AudioStreamService
   ) { }
-
-  play(item: SearchItem) {
-    this.audioStream.fetch(item.snippet.title, item.id.videoId)
-      .then(audioItem => {
-        this.player.play(audioItem.buffer)
-        this.session.currentSong = audioItem;
-      })
-  }
-
-  add(item: SearchItem) {
-
-  }
 
   search() {
     if (!this.pattern)
@@ -42,7 +27,7 @@ export class YoutubeSearchComponent {
     let query = this.url + 'part=snippet&type=video&q=' + this.pattern.split(' ').join('+') + '&key=' + this.key;
     this.http.get<YouTubeSearchResult>(query)
       .toPromise()
-      .then(searchResult => this.items = searchResult.items)
+      .then(searchResult => this.session.ytSearchItems = searchResult.items)
       .catch(error => console.log('Encoutered an error: ', error));
   }
 }

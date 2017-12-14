@@ -3,7 +3,12 @@
 body {
   font-size: 20px;
   font-family: 'Raleway', sans-serif;
+  color: rgba(42, 42, 42, 0.75);
   background-color: rgba(136, 136, 136, 0.1);
+}
+
+.primary-text-color {
+  color: rgb(109, 165, 25);
 }
 
 .cursor{
@@ -39,7 +44,17 @@ body {
   width: 50%;
 }
 
-.search-container {
+.container-content {
+  font-size: 80%;
+  margin-left: 1em;
+}
+
+.section-label {
+  margin-bottom: 1em;
+  text-decoration: underline;
+}
+
+/* .search-container {
   float: right;
   width: 15%;
   font-size: 75%;
@@ -57,4 +72,4 @@ body {
 
 .search-container img:hover{
   opacity: 0.75;
-}
+} */
