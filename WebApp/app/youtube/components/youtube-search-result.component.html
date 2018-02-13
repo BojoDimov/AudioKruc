@@ -4,7 +4,7 @@
   </div>
 
   <div *ngIf="session.showSearchResults" class="container-content">
-    <div *ngFor='let item of session.ytSearchItems'>
+    <div *ngFor='let item of session.ytSearchItems' class="mg-up-down">
       <img src="{{item.snippet.thumbnails.default.url}}" />
       <div style="display:inline-block">
         <span class="fixed-width-span">{{item.snippet.title}}</span>

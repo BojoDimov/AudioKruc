@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { SearchItem, YouTubeSearchResult } from "../youtube-search.barrel";
 import { AudioItem, FetchService, SessionService, PlayerService, AudioStreamService } from '../../infrastructure/infrastructure.barrel';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'ak-youtube-search',
   templateUrl: './youtube-search.component.html',
@@ -19,7 +19,13 @@ export class YoutubeSearchComponent {
   constructor(
     private http: HttpClient,
     private session: SessionService,
-  ) { }
+  ) {
+    $(document).on("keypress", "#youtube-search-input", e => {
+      if (e.which == 13) {
+        this.search();
+      }
+    });
+  }
 
   search() {
     if (!this.pattern)

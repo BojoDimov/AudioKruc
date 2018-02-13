@@ -3,6 +3,7 @@ import * as io from 'socket.io-client';
 
 import { AudioItem, AudioQueueItem } from '../infrastructure.barrel';
 import { SearchItem } from "../../youtube/youtube-search.barrel";
+import { EventEmitter } from "events";
 
 @Injectable()
 export class SessionService {
@@ -13,8 +14,19 @@ export class SessionService {
   socket = io('http://localhost:12909');
   pending = false;
   autoplay = false;
+  sessionId = 0;
   showSearchResults = true;
   showQueue = true;
+  events = new EventEmitter();
+
+  constructor() {
+    this.socket.on('session', data => {
+      console.log('Received session', data);
+      this.sessionId = data.sessionId;
+      console.log('Created session:' + data.sessionId)
+      this.events.emit('session-init', data.sessionId);
+    });
+  }
 
   ytSearchItems: SearchItem[] = [];
   defaults = {

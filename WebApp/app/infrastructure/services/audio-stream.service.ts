@@ -12,22 +12,23 @@ export class AudioStreamService {
     private player: PlayerService
   ) { }
 
-  fetch(title: string, key: string): Promise<AudioItem> {
+  // fetch(title: string, key: string): Promise<AudioItem> {
+  fetch(songRequestData): Promise<AudioItem> {
     return new Promise<AudioItem>((resolve, reject) => {
-      let audioItem = this.session.songs.find(song => song.key == key);
+      let audioItem = this.session.songs.find(song => song.key == songRequestData.key);
       if (audioItem) {
         return resolve(audioItem);
       }
 
       audioItem = new AudioItem();
-      audioItem.name = title;
-      audioItem.key = key;
+      audioItem.name = songRequestData.name;
+      audioItem.key = songRequestData.key;
       this.session.addSong(audioItem);
 
       this.session.pending = true;
-      this.session.socket.emit('requestSong', { key: key });
+      this.session.socket.emit('requestSong', songRequestData);
 
-      this.session.socket.on('receiveSongChunk:' + key, chunk => {
+      this.session.socket.on('receiveSongChunk:' + songRequestData.key, chunk => {
         this.player.audioContext.decodeAudioData(chunk)
           .then(audioBuffer => {
             audioItem.buffer = audioBuffer;
