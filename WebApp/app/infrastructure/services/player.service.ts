@@ -6,6 +6,7 @@ import { SessionService } from '../infrastructure.barrel';
 @Injectable()
 export class PlayerService {
   public audioContext: AudioContext = null;
+  public analyzer: AnalyserNode;
   source: AudioBufferSourceNode = null;
   gain: GainNode = null;
   startedPlaying = 0;
@@ -24,9 +25,12 @@ export class PlayerService {
 
   init() {
     this.audioContext = new AudioContext();
+    this.analyzer = this.audioContext.createAnalyser();
     this.gain = this.audioContext.createGain();
+    this.analyzer.connect(this.gain);
     this.gain.connect(this.audioContext.destination);
 
+    this.analyzer.fftSize = 2048;
     this.gain.gain.value = this.gain.gain.defaultValue * this.session.defaults.volume / 100;
   }
 
@@ -37,7 +41,7 @@ export class PlayerService {
   initSource() {
     this.clearSource();
     this.source = this.audioContext.createBufferSource();
-    this.source.connect(this.gain);
+    this.source.connect(this.analyzer);
   }
 
   initFlags() {

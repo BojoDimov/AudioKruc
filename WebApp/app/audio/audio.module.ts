@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AudioPlayerComponent, AudioQueueComponent } from './audio.barrel';
+import { AudioPlayerComponent, AudioQueueComponent, AudioVisualizerComponent } from './audio.barrel';
 
 @NgModule({
   imports: [
@@ -8,7 +8,8 @@ import { AudioPlayerComponent, AudioQueueComponent } from './audio.barrel';
   ],
   declarations: [
     AudioPlayerComponent,
-    AudioQueueComponent
+    AudioQueueComponent,
+    AudioVisualizerComponent
   ],
   exports: [
     AudioPlayerComponent,
