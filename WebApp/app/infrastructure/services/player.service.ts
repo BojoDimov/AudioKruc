@@ -51,6 +51,10 @@ export class PlayerService {
     };
   }
 
+  isPlaying() {
+    return this.flags.active && !this.flags.finished;
+  }
+
   play(audioBuffer: AudioBuffer, offsetPercent = 0) {
     this.initSource();
     this.initFlags();

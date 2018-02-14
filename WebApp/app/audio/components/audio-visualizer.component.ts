@@ -14,12 +14,12 @@ export class AudioVisualizerComponent implements AfterViewInit, OnDestroy {
   barHeight = 150;
   barCount = 0;
 
-  offset = .01;
+  offset = 0;//.01;
   dataRefreshRate = 60;
   dataContainer: Uint8Array;
   dataInterval = null;
 
-  constructor(private player: PlayerService) {
+  constructor(public player: PlayerService) {
     this.barCount = Math.ceil(this.width / this.barWidth);
     //this.dataContainer = new Uint8Array(this.player.analyzer.frequencyBinCount); //- some of the high frequencies are off so i sliced the array a little
     this.dataContainer = new Uint8Array(450);
