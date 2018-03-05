@@ -1,5 +1,6 @@
 const EventEmitter = require('events');
 class QueueEvents extends EventEmitter { }
+const download = require('./audio-stream').download;
 
 let io = require('socket.io')(12909);
 const ytdl = require('ytdl-core');
@@ -15,6 +16,11 @@ let exampleRequestData = {
   name: '',
   isInQueue: false
 }
+
+let options = {
+  quality: 'lowest',
+  filter: 'audioonly'
+};
 
 io.on('connection', (socket) => {
   let session = ++sessionId;
@@ -38,47 +44,34 @@ function downloadSong(session, socket, songRequestData) {
     return;
   }
 
-  let stream = ytdl('http://www.youtube.com/watch?v=' + songRequestData.key, {
-    quality: 'lowest',
-    filter: 'audioonly'
-  });
-  let bufferList = [];
+  download('http://www.youtube.com/watch?v=' + songRequestData.key, options)
+    .then(buffer => {
+      console.log('finished downloading');
+      songRequestData.buffer = buffer;
+      songRequestData.requestedFrom = session;
+      songs.push(songRequestData);
+      socket.emit('receiveSongChunk:' + songRequestData.key, buffer);
+      if (songRequestData.isInQueue)
+        queue.emit('add', songRequestData);
+    });
 
-  stream.on('data', buffer => bufferList.push(buffer));
+  // let stream = ytdl('http://www.youtube.com/watch?v=' + songRequestData.key, {
+  //   //quality: 'lowest',
+  //   quality: 'highestaudio',
+  //   filter: 'audioonly'
+  // });
+  // let bufferList = [];
 
-  stream.on('finish', () => {
-    console.log('finished downloading');
-    let buffer = Buffer.concat(bufferList);
-    songRequestData.buffer = buffer;
-    songRequestData.requestedFrom = session;
-    songs.push(songRequestData);
-    socket.emit('receiveSongChunk:' + songRequestData.key, buffer);
-    if (songRequestData.isInQueue)
-      queue.emit('add', songRequestData);
-  });
+  // stream.on('data', buffer => bufferList.push(buffer));
+
+  // stream.on('finish', () => {
+  //   console.log('finished downloading');
+  //   let buffer = Buffer.concat(bufferList);
+  //   songRequestData.buffer = buffer;
+  //   songRequestData.requestedFrom = session;
+  //   songs.push(songRequestData);
+  //   socket.emit('receiveSongChunk:' + songRequestData.key, buffer);
+  //   if (songRequestData.isInQueue)
+  //     queue.emit('add', songRequestData);
+  // });
 }
-
-// function notifyConnections(connections, songRequestData) {
-//   connections.forEach(conn => {
-//     console.log('Emmiting event', 'queue-add:' + conn.sessionId);
-//     conn.emit('queue-add:' + conn.sessionId, songRequestData)
-//   });
-// }
-
-// stream.on('progress', (chunkSize, downloaded, totalSize) => {
-//   console.log("Downloaded: ", downloaded);
-//   console.log("Total size: ", totalSize);
-// });
-
-// ytdl.getInfo('http://www.youtube.com/watch?v=' + songRequestData.key)
-//   .then(info => console.log(info.formats
-//     .filter(e => e.audioEncoding == "mp3")
-//     .map(f => {
-//       return {
-//         type: f.type,
-//         container: f.container,
-//         audioEncoding: f.audioEncoding,
-//         audioBitrate: f.audioBitrate,
-//         itag: f.itag
-//       };
-//     })));
