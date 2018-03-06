@@ -1,9 +1,10 @@
 let fs = require('fs');
+let ytdl = require('ytdl-core');
 let download = require('./audio-stream').download;
 let url = 'https://www.youtube.com/watch?v=B2m_WnXjqnM';
 
 //normalDownload(url);
-chunkDownload(url);
+test0(url);
 //test1();
 
 function chunkDownload(url) {
@@ -19,6 +20,22 @@ function normalDownload(url) {
   let stream = ytdl(url, { quality: 'highestaudio', filter: 'audioonly' });
   stream.resume();
   stream.on('finish', () => console.log('Normal download elapsed time', new Date() - start));
+}
+
+function test0(url) {
+  let chunkSize = 368640;
+  let options = {
+    quality: 'highestaudio',
+    filter: 'audioonly',
+    range: {
+      start: 0,
+      end: chunkSize - 1
+    }
+  };
+  let start = new Date();
+  let stream = ytdl(url, options);
+  stream.resume();
+  stream.on('finish', () => console.log('elapsed time', new Date() - start));
 }
 
 function test1() {
@@ -75,3 +92,49 @@ function notifyConnections(connections, songRequestData) {
 //         itag: f.itag
 //       };
 //     })));
+
+
+// let stream = ytdl('http://www.youtube.com/watch?v=' + songRequestData.key, {
+//   //quality: 'lowest',
+//   quality: 'highestaudio',
+//   filter: 'audioonly'
+// });
+// let bufferList = [];
+
+// stream.on('data', buffer => bufferList.push(buffer));
+
+// stream.on('finish', () => {
+//   console.log('finished downloading');
+//   let buffer = Buffer.concat(bufferList);
+//   songRequestData.buffer = buffer;
+//   songRequestData.requestedFrom = session;
+//   songs.push(songRequestData);
+//   socket.emit('receiveSongChunk:' + songRequestData.key, buffer);
+//   if (songRequestData.isInQueue)
+//     queue.emit('add', songRequestData);
+// });
+
+function downloadSong() {
+  // console.log('Requested song:', songRequestData);
+  // let song = songs.find(song => song.key == songRequestData.key);
+  // if (song) {
+  //   console.log('resolved without downloading');
+  //   song.requestedFrom = session;
+  //   socket.emit('receiveSongChunk:' + song.key, song.buffer);
+  //   if (songRequestData.isInQueue)
+  //     queue.emit('add', song);
+  //   return;
+  // }
+  let url = 'http://www.youtube.com/watch?v=' + songRequestData.key;
+  return getTotalSize(url, options)
+    .then(size => splitToChunks(url, size, options))
+    .then(buffer => {
+      //console.log('finished downloading');
+      //songRequestData.buffer = buffer;
+      //songRequestData.requestedFrom = session;
+      //songs.push(songRequestData);
+      socket.emit('receiveSongChunk:' + songRequestData.key, buffer);
+      // if (songRequestData.isInQueue)
+      //   queue.emit('add', songRequestData);
+    });
+}

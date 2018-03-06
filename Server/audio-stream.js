@@ -1,8 +1,28 @@
 let ytdl = require('ytdl-core');
+let fs = require('fs');
+const options = {
+  quality: 'highestaudio',
+  filter: 'audioonly'
+};
 
-module.exports.download = function (url, options) {
-  return getTotalSize(url, options)
-    .then(size => splitToChunks(url, size, options));
+module.exports.options = options;
+module.exports.downloadSong = function (session, socket, songRequestData) {
+  let url = 'http://www.youtube.com/watch?v=' + songRequestData.key;
+
+  if (canResolveFromFs(songRequestData.key))
+    socket.emit('receiveSongChunk:' + songRequestData.key,
+      fs.readFileSync(`../Data/${songRequestData.key}.mp3`));
+  else
+    getTotalSize(url, options)
+      .then(size => splitToChunks(url, size, options))
+      .then(buffer => {
+        socket.emit('receiveSongChunk:' + songRequestData.key, buffer);
+        fs.createWriteStream(`../Data/${songRequestData.key}.mp3`).write(buffer);
+      });
+}
+
+function canResolveFromFs(key) {
+  return fs.readdirSync('../Data').find(e => e.indexOf(key) != -1) != undefined;
 }
 
 function getTotalSize(url, options) {
@@ -17,7 +37,8 @@ function getTotalSize(url, options) {
 }
 
 function splitToChunks(url, totalSize, options) {
-  let chunkSize = 786432;
+  let chunkSize = 368640; // roughly 10 sec @ 128kps
+  // for streaming to the front-end the chunk size must be about 368640 / 5 ~~ 10 sec of playtime at lowest audio quality
   let promises = [];
 
   for (let i = 0; chunkSize * i < totalSize; i++) {
