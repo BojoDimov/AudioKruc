@@ -1,7 +1,10 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { AudioItem } from '../models/audio-item.model';
-
-import { SessionService } from '../infrastructure.barrel';
+import {
+  SessionService,
+  FetchService,
+  AudioItem,
+  AudioSource
+} from '../infrastructure.barrel';
 
 @Injectable()
 export class PlayerService {
@@ -9,8 +12,8 @@ export class PlayerService {
   public analyzer: AnalyserNode;
   source: AudioBufferSourceNode = null;
   gain: GainNode = null;
-  startedPlaying = 0;
-  offsetPercent = 0;
+
+  public current: AudioSource = null;
 
   public flags = {
     active: false,
@@ -18,9 +21,11 @@ export class PlayerService {
   };
 
   constructor(
-    private session: SessionService
+    private session: SessionService,
+    private data: FetchService
   ) {
     this.init();
+    data.init(this.audioContext);
   }
 
   init() {
@@ -34,14 +39,12 @@ export class PlayerService {
     this.gain.gain.value = this.gain.gain.defaultValue * this.session.defaults.volume / 100;
   }
 
-  decode(buffer: ArrayBuffer) {
-    return this.audioContext.decodeAudioData(buffer);
-  }
-
-  initSource() {
+  initSource(audioSource: AudioSource) {
     this.clearSource();
     this.source = this.audioContext.createBufferSource();
     this.source.connect(this.analyzer);
+    this.source.buffer = audioSource.buffer;
+    this.current = audioSource;
   }
 
   initFlags() {
@@ -55,15 +58,40 @@ export class PlayerService {
     return this.flags.active && !this.flags.finished;
   }
 
-  play(audioBuffer: AudioBuffer, offsetPercent = 0) {
-    this.initSource();
+  play(item: AudioItem) {
+    this.data.load(item)
+      .then(source => this._play(source));
+  }
+
+  seek(percent: number) {
+    if (!this.current)
+      return;
+
+    this.initSource(this.current);
     this.initFlags();
     this.resume();
-    this.source.buffer = audioBuffer;
-    this.source.start(0, this.source.buffer.duration * offsetPercent);
-    this.startedPlaying = this.audioContext.currentTime;
-    this.offsetPercent = offsetPercent;
+    this.source.start(0, this.source.buffer.duration * percent);
+    this.current.startedPlaying = this.audioContext.currentTime;
+    this.current.offsetPercent = percent;
   }
+
+  private _play(source: AudioSource) {
+    this.initSource(source);
+    this.initFlags();
+    this.resume();
+    this.source.start(0);
+    this.current.startedPlaying = this.audioContext.currentTime;
+  }
+
+  // play_old(audioBuffer: AudioBuffer, offsetPercent = 0) {
+  //   this.initSource();
+  //   this.initFlags();
+  //   this.resume();
+  //   this.source.buffer = audioBuffer;
+  //   this.source.start(0, this.source.buffer.duration * offsetPercent);
+  //   this.startedPlaying = this.audioContext.currentTime;
+  //   this.offsetPercent = offsetPercent;
+  // }
 
   pause() {
     if (this.flags.active && this.audioContext.state === 'running')
@@ -76,9 +104,8 @@ export class PlayerService {
   }
 
   replay() {
-    if (this.flags.finished) {
-      let buffer = this.source.buffer;
-      this.play(buffer);
+    if (this.flags.finished && this.current) {
+      this._play(this.current);
     }
   }
 
@@ -87,18 +114,11 @@ export class PlayerService {
       this.gain.gain.value = this.gain.gain.defaultValue * percent / 100;
   }
 
-  seek(percent: number) {
-    if (!this.source)
-      return;
-    let buffer = this.source.buffer;
-    this.play(buffer, percent);
-  }
-
   calculateProgress() {
     // returns progress as double
     if (!this.source)
       return 0;
-    let progress = ((this.audioContext.currentTime - this.startedPlaying + this.offsetPercent * this.source.buffer.duration) / this.source.buffer.duration)
+    let progress = ((this.audioContext.currentTime - this.current.startedPlaying + this.current.offsetPercent * this.source.buffer.duration) / this.source.buffer.duration)
     //console.log("Progress:", progress);
     return progress;
   }
@@ -119,4 +139,11 @@ export class PlayerService {
     if (this.flags.active)
       this.flags.finished = true;
   }
+}
+
+export enum PlayerState {
+  playing,
+  paused,
+  finished,
+  inactive
 }

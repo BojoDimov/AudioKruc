@@ -4,54 +4,57 @@ import * as Writable from 'web-audio-stream/writable';
 import { AudioItem, AudioStreamableItem, SessionService, PlayerService } from '../infrastructure.barrel';
 
 @Injectable()
-export class AudioStreamService {
-  audioItemReference: AudioItem;
+export class AudioStreamService { }
 
-  constructor(
-    private session: SessionService,
-    private player: PlayerService
-  ) { }
+// @Injectable()
+// export class AudioStreamService {
+//   audioItemReference: AudioItem;
 
-  // fetch(title: string, key: string): Promise<AudioItem> {
-  fetch(songRequestData): Promise<AudioItem> {
-    return new Promise<AudioItem>((resolve, reject) => {
-      let audioItem = this.session.songs.find(song => song.key == songRequestData.key);
-      if (audioItem) {
-        return resolve(audioItem);
-      }
+//   constructor(
+//     private session: SessionService,
+//     private player: PlayerService
+//   ) { }
 
-      audioItem = new AudioItem();
-      audioItem.name = songRequestData.name;
-      audioItem.key = songRequestData.key;
-      this.session.addSong(audioItem);
+//   // fetch(title: string, key: string): Promise<AudioItem> {
+//   fetch(songRequestData): Promise<AudioItem> {
+//     return new Promise<AudioItem>((resolve, reject) => {
+//       let audioItem = this.session.songs.find(song => song.key == songRequestData.key);
+//       if (audioItem) {
+//         return resolve(audioItem);
+//       }
 
-      this.session.pending = true;
-      this.session.socket.emit('requestSong', songRequestData);
+//       audioItem = new AudioItem();
+//       audioItem.name = songRequestData.name;
+//       audioItem.key = songRequestData.key;
+//       this.session.addSong(audioItem);
 
-      this.session.socket.on('receiveSongChunk:' + songRequestData.key, chunk => {
-        this.player.audioContext.decodeAudioData(chunk)
-          .then(audioBuffer => {
-            audioItem.buffer = audioBuffer;
-            this.session.pending = false;
-            resolve(audioItem);
-          })
-          .catch(err => reject(err));
-      });
-    })
-  }
+//       this.session.pending = true;
+//       this.session.socket.emit('requestSong', songRequestData);
 
-  fetchStreamable(title: string, key: string): Promise<AudioStreamableItem> {
-    let audioItem = new AudioStreamableItem();
-    audioItem.name = title;
-    audioItem.key = key;
-    audioItem.stream = Writable(this.player.audioContext.destination);
+  //     this.session.socket.on('receiveSongChunk:' + songRequestData.key, chunk => {
+  //       this.player.audioContext.decodeAudioData(chunk)
+  //         .then(audioBuffer => {
+  //           audioItem.buffer = audioBuffer;
+  //           this.session.pending = false;
+  //           resolve(audioItem);
+  //         })
+  //         .catch(err => reject(err));
+  //     });
+  //   })
+  // }
 
-    this.session.socket.emit('requestSong', { key: key });
-    this.session.socket.on('receiveSongChunk:' + key, chunk => {
-      this.player.audioContext.decodeAudioData(chunk)
-        .then(audioBuffer => audioItem.stream.write(audioBuffer));
-    });
+//   fetchStreamable(title: string, key: string): Promise<AudioStreamableItem> {
+//     let audioItem = new AudioStreamableItem();
+//     audioItem.name = title;
+//     audioItem.key = key;
+//     audioItem.stream = Writable(this.player.audioContext.destination);
 
-    return Promise.resolve(audioItem);
-  }
-}
+//     this.session.socket.emit('requestSong', { key: key });
+//     this.session.socket.on('receiveSongChunk:' + key, chunk => {
+//       this.player.audioContext.decodeAudioData(chunk)
+//         .then(audioBuffer => audioItem.stream.write(audioBuffer));
+//     });
+
+//     return Promise.resolve(audioItem);
+//   }
+// }

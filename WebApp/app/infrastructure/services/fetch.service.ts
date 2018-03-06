@@ -1,11 +1,12 @@
-import { Injectable, ReflectiveInjector } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { SessionService, AudioItem, AudioSource } from "../infrastructure.barrel";
+import { Injectable } from '@angular/core';
+import {
+  SessionService,
+  AudioItem,
+  AudioSource
+} from "../infrastructure.barrel";
 
 @Injectable()
 export class FetchService {
-  loadThreshhold = .7;
-  chunkSize = 20; //seconds
   context: AudioContext;
 
   constructor(
@@ -16,36 +17,22 @@ export class FetchService {
     this.context = ctx;
   }
 
-  // get(item: AudioItem): Promise<AudioBufferSourceNode> {
-  //   return new Promise<AudioSource>((res, rej) => {
-  //     let audioSource = new AudioSource();
-  //     res(audioSource);
-  //     let loadInterval = setInterval(this.load.bind(this), 1000);
-  //   });
-  // }
-
-  load(item: AudioItem) {
+  load(item: AudioItem): Promise<AudioSource> {
     let audioSource = new AudioSource();
-    let node = this.context.createBufferSource();
-    node.buffer = audioSource.buffer;
+    audioSource.name = item.name;
+    this.session.pending = true;
+    this.session.socket.emit('requestSong', item);
 
-
-    this.loadChunk(audioSource, 0)
-      .then(() => {
-      })
-  }
-
-  _load(source: AudioSource) {
-    //find current interval
-    let chunk = source.loaded.find(e => e.start <= source.current && e.end >= source.current);
-    if (!chunk) {
-      //load first part
-    } else if ((source.current - chunk.start) / (chunk.end - chunk.start) > this.loadThreshhold) {
-      //load next part
-    }
-  }
-
-  loadChunk(item: AudioSource, start: number) {
-    return new Promise<ArrayBuffer>((res, rej) => res(new ArrayBuffer(1024)));
+    return new Promise((res, rej) => {
+      this.session.socket.on('receiveSong:' + item.key, song => {
+        this.context.decodeAudioData(song)
+          .then(buffer => {
+            this.session.pending = false;
+            audioSource.buffer = buffer;
+            audioSource.duration = buffer.duration;
+            res(audioSource);
+          });
+      });
+    });
   }
 }

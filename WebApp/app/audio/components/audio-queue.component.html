@@ -5,10 +5,10 @@
   <div *ngIf="session.showQueue" class="container-content">
     <div *ngFor="let song of session.queue; let i = index">
       <span [class.primary-text-color]="session.queueIndex == i">{{i+1}}. {{song.name}}</span>
-      <span (click)="play(song, i)" class="cursor text-secondary mg-side" *ngIf="!session.currentSong || session.currentSong.key != song.key">
+      <span (click)="play(i)" class="cursor text-secondary mg-side" *ngIf="!session.currentSong || session.currentSong.key != song.key">
           <i class="fa fa-play" aria-hidden="true"></i>
       </span>
-      <span (click)="remove(song, i)" class="cursor text-secondary mg-side">
+      <span (click)="remove(i)" class="cursor text-secondary mg-side">
           <i class="fa fa-times" aria-hidden="true"></i>
       </span>
     </div>

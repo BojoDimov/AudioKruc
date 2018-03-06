@@ -12,7 +12,7 @@ export class AudioPlayerComponent {
   ticker = null;
 
   constructor(
-    public playerService: PlayerService,
+    public player: PlayerService,
     public session: SessionService
   ) {
     this.volume = session.defaults.volume;
@@ -22,16 +22,16 @@ export class AudioPlayerComponent {
       let newWidth = e.pageX - $(this).offset().left;
       let totWidth = $(this).width();
       $("#progress").width(newWidth);
-      playerService.seek(newWidth / totWidth);
+      player.seek(newWidth / totWidth);
     });
   }
 
   tick() {
-    let progress = this.playerService.calculateProgress();
+    let progress = this.player.calculateProgress();
     if (progress < 1)
       $("#progress").width($("#progress-bar").width() * progress);
     else
-      this.playerService.notify('end');
+      this.player.notify('end');
   }
 
   showProgress() {
@@ -39,23 +39,16 @@ export class AudioPlayerComponent {
   }
 
   changeVolume(value) {
-    this.playerService.volume(value);
+    this.player.volume(value);
   }
 
   nextSong() {
-    if (this.session.queueIndex + 1 < this.session.queue.length) {
-      this.session.queueIndex++;
-      this.session.currentSong = this.session.songs[this.session.queue[this.session.queueIndex].index];
-      this.playerService.play(this.session.currentSong.buffer);
-    }
-
+    if (this.session.canPlayNext())
+      this.player.play(this.session.queue[++this.session.currentSong]);
   }
 
   prevSong() {
-    if (this.session.queueIndex - 1 >= 0) {
-      this.session.queueIndex--;
-      this.session.currentSong = this.session.songs[this.session.queue[this.session.queueIndex].index];
-      this.playerService.play(this.session.currentSong.buffer);
-    }
+    if (this.session.canPlayPrev())
+      this.player.play(this.session.queue[--this.session.currentSong]);
   }
 }

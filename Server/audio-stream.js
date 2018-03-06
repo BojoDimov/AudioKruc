@@ -10,13 +10,13 @@ module.exports.downloadSong = function (session, socket, songRequestData) {
   let url = 'http://www.youtube.com/watch?v=' + songRequestData.key;
 
   if (canResolveFromFs(songRequestData.key))
-    socket.emit('receiveSongChunk:' + songRequestData.key,
+    socket.emit('receiveSong:' + songRequestData.key,
       fs.readFileSync(`../Data/${songRequestData.key}.mp3`));
   else
     getTotalSize(url, options)
       .then(size => splitToChunks(url, size, options))
       .then(buffer => {
-        socket.emit('receiveSongChunk:' + songRequestData.key, buffer);
+        socket.emit('receiveSong:' + songRequestData.key, buffer);
         fs.createWriteStream(`../Data/${songRequestData.key}.mp3`).write(buffer);
       });
 }

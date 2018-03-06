@@ -7,10 +7,8 @@ import { EventEmitter } from "events";
 
 @Injectable()
 export class SessionService {
-  songs: AudioItem[] = [];
-  queue: AudioQueueItem[] = [];
-  queueIndex = -1;
-  currentSong: AudioItem = null;
+  queue: AudioItem[] = [];
+  currentSong = -1;
   socket = io('http://localhost:12909');
   pending = false;
   autoplay = false;
@@ -28,12 +26,17 @@ export class SessionService {
     });
   }
 
+  canPlayNext() {
+    return this.currentSong + 1 < this.queue.length;
+  }
+
+  canPlayPrev() {
+    return this.currentSong - 1 >= 0;
+  }
+
   ytSearchItems: SearchItem[] = [];
+
   defaults = {
     volume: 60
   };
-
-  addSong(song: AudioItem) {
-    this.songs.push(song);
-  }
 } 
