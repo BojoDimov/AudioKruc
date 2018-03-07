@@ -35,4 +35,8 @@ export class FetchService {
       });
     });
   }
+
+  load2(): Promise<ArrayBuffer> {
+    return new Promise((res, rej) => { });
+  }
 }
