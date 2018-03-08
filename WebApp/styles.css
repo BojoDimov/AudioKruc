@@ -3,12 +3,6 @@
 body {
   font-size: 20px;
   font-family: 'Raleway', sans-serif;
-  color: rgba(42, 42, 42, 0.75);
-  background-color: rgba(136, 136, 136, 0.1);
-}
-
-.primary-text-color {
-  color: rgb(109, 165, 25);
 }
 
 .cursor{
@@ -28,13 +22,13 @@ body {
 }
 
 #progress-bar{
-  background-color: rgba(109, 165, 25, 0.20);
+  /* background-color: rgba(109, 165, 25, 0.20); */
   height: 0.8em;
   cursor: pointer;
 }
 
 #progress {
-  background-color: rgb(109, 165, 25);
+  /* background-color: rgb(109, 165, 25); */
   width: 0;
   height: inherit;
 }
@@ -53,23 +47,3 @@ body {
   margin-bottom: 1em;
   text-decoration: underline;
 }
-
-/* .search-container {
-  float: right;
-  width: 15%;
-  font-size: 75%;
-  margin: 1em 1em;
-}
-
-.search-container div{
-  margin-bottom: 1em;
-}
-
-.search-container img{
-  width: 100px;
-  height: 100px;
-}
-
-.search-container img:hover{
-  opacity: 0.75;
-} */

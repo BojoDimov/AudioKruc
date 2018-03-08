@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "ak",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "light-theme.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js"

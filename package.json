@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "concurrently \"npm run webapp\" \"npm run server\"",
     "server": "node ./Server/soc-serv.js",
-    "webapp": "ng serve",
+    "webapp": "ng serve --port 5200",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
