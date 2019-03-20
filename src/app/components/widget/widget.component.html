@@ -1,0 +1,14 @@
+<div class="widget">
+  <div class="header" (click)="open = !open">
+    <ng-content select="[slot=header]"></ng-content>
+  </div>
+  <div class="body" *ngIf="open">
+    <ng-content select="[slot=body]"></ng-content>
+  </div>
+  <div class="wrapper">
+    <ng-content select="[slot=wrapper]"></ng-content>
+  </div>
+  <div class="footer">
+    <ng-content select="[slot=footer]"></ng-content>
+  </div>
+</div>

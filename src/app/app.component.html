@@ -1,10 +1,38 @@
-<div class="left-widget-container">
-
+<div class="widget-container-left">
+  <widget>
+    <div slot="wrapper">
+      <fa-icon class="pointer" [icon]="['fas', 'power-off']"></fa-icon>
+      <!-- <fa-icon class="pointer" [icon]="['far', 'moon']"></fa-icon>
+      <fa-icon class="pointer" icon="sun"></fa-icon> -->
+    </div>
+  </widget>
 </div>
-<div class="main">
 
+<div class="widget-container-center">
+  <widget>
+    <div slot="wrapper">
+      <input type="search" />
+    </div>
+  </widget>
+
+  <widget>
+    <div slot="header">
+      Опции
+    </div>
+  </widget>
+
+  <widget>
+    <div slot="header">
+      Резултати
+    </div>
+  </widget>
 </div>
 
-<div class="right-widget-container">
-
+<div class="widget-container-right">
+  <div class="widget">
+    <h3>Right widget 1</h3>
+  </div>
+  <div class="widget">
+    <h3>Right widget 2</h3>
+  </div>
 </div>

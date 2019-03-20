@@ -1,32 +1,109 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat-core();
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$AudioKruc-primary: mat-palette($mat-indigo);
-$AudioKruc-accent: mat-palette($mat-pink, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$AudioKruc-warn: mat-palette($mat-red);
-
-// Create the theme object (a Sass map containing all of the palettes).
-$AudioKruc-theme: mat-light-theme($AudioKruc-primary, $AudioKruc-accent, $AudioKruc-warn);
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include angular-material-theme($AudioKruc-theme);
-
-/* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.pointer {
+  cursor: pointer;
+}
+
+app-root {
+  $small-spacing: .3rem;
+  $spacing: .5rem;
+  $large-spacing: 1rem;
+  $text-color: rgb(60, 60, 60);
+  $bg-color: whitesmoke;
+
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  @media screen and(max-width: 600px) {
+    flex-direction: column;
+  }
+
+  fa-icon + fa-icon {
+    margin-left: $small-spacing;
+  }
+
+  fa-icon.pointer:hover {
+    color: darken($text-color, 100%);
+  }
+
+  .widget-container {
+    border: 1px solid lightcoral;
+    display: flex;
+    flex-direction: column;
+
+    .widget {
+      color: $text-color;
+      margin: $large-spacing $spacing;
+
+      .header {
+        cursor: pointer;
+        text-decoration: underline;
+        background-color: $bg-color;
+      }
+
+      .body {
+        background-color: $bg-color;
+      }
+
+      .footer {
+        background-color: $bg-color;
+      }
+    }
+  }
+
+  .widget-container-left {
+    @extend .widget-container;
+    flex: 1;
+    background-color: lavender;
+  }
+
+  .widget-container-center {
+    @extend .widget-container;
+    flex: 2;
+    background-color: lightseagreen;
+
+    @media screen and(max-width: 600px) {
+      order: -1;
+    }
+  }
+
+  .widget-container-right {
+    @extend .widget-container;
+    flex: 1;
+    background-color: lemonchiffon;
+  }
+}
+
+// // Custom Theming for Angular Material
+// // For more information: https://material.angular.io/guide/theming
+// @import '~@angular/material/theming';
+// // Plus imports for other components in your app.
+
+// // Include the common styles for Angular Material. We include this here so that you only
+// // have to load a single css file for Angular Material in your app.
+// // Be sure that you only ever include this mixin once!
+// @include mat-core();
+
+// // Define the palettes for your theme using the Material Design palettes available in palette.scss
+// // (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// // hue. Available color palettes: https://material.io/design/color/
+// $AudioKruc-primary: mat-palette($mat-indigo);
+// $AudioKruc-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// // The warn palette is optional (defaults to red).
+// $AudioKruc-warn: mat-palette($mat-red);
+
+// // Create the theme object (a Sass map containing all of the palettes).
+// $AudioKruc-theme: mat-light-theme($AudioKruc-primary, $AudioKruc-accent, $AudioKruc-warn);
+
+// // Include theme styles for core and each component used in your app.
+// // Alternatively, you can import and @include the theme mixins for each component
+// // that you are using.
+// @include angular-material-theme($AudioKruc-theme);
+
+// /* You can add global styles to this file, and also import other style files */
