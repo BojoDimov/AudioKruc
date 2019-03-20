@@ -1,0 +1,40 @@
+@import 'variables';
+
+app-root {
+  @media screen and(max-width: 600px) {
+    flex-direction: column;
+  }
+}
+
+.widget-container {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.widget-container-left {
+  @extend .widget-container;
+  flex: 1;
+
+  @media screen and(max-width: 600px) {
+    flex: none;
+  }
+}
+
+.widget-container-center {
+  @extend .widget-container;
+  flex: 2;
+
+  @media screen and(max-width: 600px) {
+    //order: -1;
+  }
+}
+
+.widget-container-right {
+  @extend .widget-container;
+  flex: 1;
+  
+  @media screen and(max-width: 600px) {
+    flex: none;
+  }
+}

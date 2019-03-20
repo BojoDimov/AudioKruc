@@ -1,0 +1,20 @@
+@import 'variables';
+
+.widget {
+  color: $text-color;
+  margin: $large-spacing $spacing;
+
+  .header {
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 1.2 * $font-size
+  }
+
+  .body {
+    //background-color: $bg-color;
+  }
+
+  .footer {
+    //background-color: $bg-color;
+  }
+}
