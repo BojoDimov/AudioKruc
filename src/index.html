@@ -8,6 +8,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://apis.google.com/js/api.js"></script>
+  <!-- <script>
+    gapi.load('auth2', () => {
+      console.log('Auth2 is loaded');
+      let initButBinded = gapi.auth2.init.bind(this);
+
+      gapi.auth2.init = (params) => {
+        console.log(`Calling "gapi.auth2.init" with parameters`, params);
+        return initButBinded(params);
+      }
+    })
+  </script> -->
+
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>

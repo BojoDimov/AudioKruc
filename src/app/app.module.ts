@@ -7,7 +7,7 @@ import { faCoffee, faMoon, faPowerOff, faSun } from '@fortawesome/free-solid-svg
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 
-import { GoogleApiWrapperModule } from './google-api';
+import { GoogleApiProviders } from './gapi.provider';
 
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
@@ -20,10 +20,11 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    GoogleApiWrapperModule,
     ComponentsModule
   ],
-  providers: [],
+  providers: [
+    ...GoogleApiProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
