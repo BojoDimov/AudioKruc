@@ -11,10 +11,14 @@ import { GoogleApiProviders } from './gapi.provider';
 
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
+import { YoutubePlaylistsComponent } from './youtube-playlists/youtube-playlists.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    YoutubePlaylistsComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
