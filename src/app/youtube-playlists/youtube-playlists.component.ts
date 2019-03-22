@@ -36,14 +36,19 @@ export class YoutubePlaylistsComponent {
       '/youtube/v3/playlists',
       {
         'mine': 'true',
-        'maxResults': '25',
+        'maxResults': '50',
         'part': 'snippet,contentDetails'
       });
     this.playlists = result.items;
   }
+
+  selectPlaylist(playlist: YoutubePlaylist) {
+    this.session.selectedPlaylist.emit(playlist);
+  }
 }
 
-class YoutubePlaylist {
+export class YoutubePlaylist {
+  id: string;
   snippet: {
     title: string,
     description: string,
@@ -57,7 +62,7 @@ class YoutubePlaylist {
   }
 }
 
-class Thumbnail {
+export class Thumbnail {
   url: string
   width: number
   height: number

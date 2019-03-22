@@ -13,12 +13,14 @@ import { AppComponent } from './app.component';
 import { YoutubePlaylistsComponent } from './youtube-playlists/youtube-playlists.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SessionService } from './session.service';
+import { PlaylistViewComponent } from './playlist-view/playlist-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     YoutubePlaylistsComponent,
-    SettingsComponent
+    SettingsComponent,
+    PlaylistViewComponent
   ],
   imports: [
     BrowserModule,
