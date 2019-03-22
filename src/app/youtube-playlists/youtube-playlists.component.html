@@ -1,6 +1,9 @@
 <widget>
   <div slot="header">Youtube playlists</div>
   <div slot="body">
-    <em>Няма заредени плейлисти</em>
+    <em *ngIf="!playlists || playlists.length == 0">Няма заредени плейлисти</em>
+    <div *ngFor="let playlist of playlists">
+      {{playlist.snippet.title}} ({{playlist.contentDetails.itemCount}})
+    </div>
   </div>
 </widget>
