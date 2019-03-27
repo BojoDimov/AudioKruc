@@ -31,7 +31,12 @@ input[type=search] {
 app-root {
   font-size: $font-size;
   color: $text-color;
-  background-color: $background;
+
+  background-image: url('./assets/logo.png');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 
   margin: 0;
   padding: 0;
