@@ -1,17 +1,43 @@
 @import 'variables';
+@import 'animations';
 
 .widget {
-  color: $text-color;
+  @extend .fade-in;
+
+  color: $secondaryColor;
   margin: $large-spacing $spacing;
+  padding: $large-spacing;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px lighten($secondaryColor, 30%);
 
   .header {
+    @include hover($primaryColor);
+
+    color: $primaryColor;
     cursor: pointer;
     text-decoration: underline;
-    font-size: 1.2 * $font-size
+    font-size: 1.2 * $font-size;
+    border-spacing: $spacing;
   }
 
   .body {
-    //background-color: $bg-color;
+    padding-top: $spacing;
+    max-height: 0;
+    transition: max-height .25s ease-in-out;
+    overflow: hidden;
+  }
+
+  &.open {
+    .body {
+      max-height: 500px;
+      transition: max-height .5s ease-in-out;
+
+      div {
+        max-height: 100%;
+        overflow-y: auto;
+      }
+    }
   }
 
   .footer {

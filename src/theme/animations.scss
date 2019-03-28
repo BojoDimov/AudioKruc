@@ -1,0 +1,28 @@
+@mixin hover($color) {
+  color: $color;
+  transition: color .3s ease-out;
+
+  &:hover {
+    color: darken($color, 10%);
+  }
+}
+
+.dropdown {
+  overflow: hidden;
+  max-height: 500px;
+  transition: max-height 1s ease-in;
+}
+
+.fade-in {
+  animation: fade-in-animation 1s ease-in-out;
+}
+
+@keyframes fade-in-animation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

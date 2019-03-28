@@ -1,8 +1,8 @@
-<div class="widget">
-  <div class="header" (click)="open = !open">
+<div class="widget" [ngClass]="{'open': open}">
+  <div class="header" (click)="open=!open">
     <ng-content select="[slot=header]"></ng-content>
   </div>
-  <div class="body" *ngIf="open">
+  <div class="body">
     <ng-content select="[slot=body]"></ng-content>
   </div>
   <div class="wrapper">
