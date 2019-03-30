@@ -5,8 +5,8 @@
   @extend .fade-in;
 
   color: $secondaryColor;
-  margin: $large-spacing $spacing;
-  padding: $large-spacing;
+  margin-bottom: $largeSpacing;
+  padding: $largeSpacing;
   background-color: $darkColor;
   border-radius: 5px;
   box-shadow: 5px 5px 5px lighten($secondaryColor, 30%);
@@ -23,6 +23,16 @@
 
   .body {
     padding-top: $spacing;
+
+    ::-webkit-scrollbar {
+      width: .2em;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: $secondaryColor;
+      border-radius: 5px;
+      //box-shadow: 0px 0px 1px lighten($secondaryColor, 20%);
+    }
 
     .action {
       @include hover($secondaryColor, -20%);

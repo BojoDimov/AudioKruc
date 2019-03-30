@@ -28,7 +28,7 @@ fa-icon.pointer:hover {
     transition: border-color .3s linear;
 
     &:focus {
-      border: 1px solid $primaryColor;
+      border: 1px solid $secondaryColor;
     }
   }
 
@@ -46,7 +46,7 @@ fa-icon.pointer:hover {
     background-color:$darkColor;
   
     &:hover {
-      color: $primaryColor;
+      color: $secondaryColor;
     }
   }
 }

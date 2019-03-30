@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from '../session.service';
+import { SessionService } from '../services/session.service';
+import { YoutubePlaylist } from '../models';
 
 @Component({
   selector: 'youtube-playlists',
@@ -31,7 +32,7 @@ export class YoutubePlaylistsComponent {
   }
 
   async loadPlaylists() {
-    const result = await this.session.GoogleApi.buildApiRequest(
+    const result = await this.session.GoogleApi.buildApiRequest<{ items: YoutubePlaylist[] }>(
       'GET',
       '/youtube/v3/playlists',
       {
@@ -45,25 +46,4 @@ export class YoutubePlaylistsComponent {
   selectPlaylist(playlist: YoutubePlaylist) {
     this.session.selectedPlaylist.emit(playlist);
   }
-}
-
-export class YoutubePlaylist {
-  id: string;
-  snippet: {
-    title: string,
-    description: string,
-    publishedAt: Date,
-    thumbnails: {
-      default: Thumbnail
-    }
-  };
-  contentDetails: {
-    itemCount: number
-  }
-}
-
-export class Thumbnail {
-  url: string
-  width: number
-  height: number
 }

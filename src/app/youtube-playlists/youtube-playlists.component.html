@@ -1,7 +1,8 @@
 <widget>
   <div slot="header">YouTube playlists</div>
   <div slot="body"
-       style="max-height: 400px; overflow-y: auto">
+       style="max-height: 400px; overflow-y: auto"
+       class="body-container">
     <em *ngIf="!playlists || playlists.length == 0">Няма заредени плейлисти</em>
     <div *ngFor="let playlist of playlists"
          class="action"

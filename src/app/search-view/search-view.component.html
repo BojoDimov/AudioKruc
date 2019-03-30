@@ -1,0 +1,12 @@
+<widget *ngIf="searchResult">
+  <div slot="header">Search results</div>
+  <div slot="body"
+       style="max-height: 600px; overflow-y: auto;">
+    <div *ngFor="let searchItem of searchResult.items"
+         style="display: flex; margin-top: 10px;">
+      <img src="{{searchItem.snippet.thumbnails.default.url}}" />
+      <span class="action"
+            style="align-self: center;margin-left: 10px;">{{searchItem.snippet.title}}</span>
+    </div>
+  </div>
+</widget>

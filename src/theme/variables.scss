@@ -5,6 +5,7 @@ $secondaryColor: rgb(226, 129, 9);
 $darkColor: rgb(41, 39, 39);
 $text-color: rgb(60, 60, 60);
 $background: whitesmoke;
+//$background: darken($darkColor, 5%);
 
 // Sizes
 $font-size: 1rem;
@@ -12,4 +13,4 @@ $font-size: 1rem;
 // Spacing between elements
 $small-spacing: .3rem;
 $spacing: .5rem;
-$large-spacing: 1rem;
+$largeSpacing: 1em;

@@ -23,12 +23,12 @@ export class GoogleApiService {
     });
   }
 
-  buildApiRequest(
+  buildApiRequest<T>(
     requestMethod: 'GET' | 'DELETE' | 'PUT' | 'POST',
     path: string,
     params: Object,
     properties?: Object
-  ) {
+  ): Promise<T> {
     params = removeEmptyParams(params);
 
     if (properties)

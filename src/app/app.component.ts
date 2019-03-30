@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { GoogleApiService } from './gapi.provider';
-import { SessionService } from './session.service';
+import { GoogleApiService } from './services/gapi.provider';
+import { SessionService } from './services/session.service';
 
 @Component({
   selector: 'app-root',

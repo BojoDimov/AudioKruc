@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from '../session.service';
-import { YoutubePlaylist, Thumbnail } from '../youtube-playlists/youtube-playlists.component';
+import { SessionService } from '../services/session.service';
+import { YoutubePlaylist, YoutubePlaylistItem } from '../models';
 
 @Component({
   selector: 'playlist-view',
@@ -21,7 +21,7 @@ export class PlaylistViewComponent implements OnInit {
 
   async loadPlaylist(playlist: YoutubePlaylist) {
     this.playlist = playlist;
-    const result = await this.session.GoogleApi.buildApiRequest(
+    const result = await this.session.GoogleApi.buildApiRequest<{ items: YoutubePlaylistItem[] }>(
       'GET',
       '/youtube/v3/playlistItems',
       {
@@ -31,18 +31,4 @@ export class PlaylistViewComponent implements OnInit {
       });
     this.playlistItems = result.items;
   }
-}
-
-export class YoutubePlaylistItem {
-  id: string;
-  snippet: {
-    title: string,
-    description: string,
-    thumbnails: {
-      default: Thumbnail
-    },
-    resourceId: {
-      videoId: string,
-    }
-  };
 }

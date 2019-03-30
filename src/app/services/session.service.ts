@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { GoogleApiService } from './gapi.provider';
-import { YoutubePlaylist } from './youtube-playlists/youtube-playlists.component';
 import { SearchService } from './search.service';
+import { YoutubePlaylist } from '../models';
 
 @Injectable()
 export class SessionService {
@@ -10,5 +10,7 @@ export class SessionService {
   constructor(
     public GoogleApi: GoogleApiService,
     public SearchApi: SearchService
-  ) { }
+  ) {
+    this.SearchApi.session = this;
+  }
 }
