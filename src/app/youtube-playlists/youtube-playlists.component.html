@@ -1,8 +1,11 @@
 <widget>
-  <div slot="header">Youtube playlists</div>
-  <div slot="body">
+  <div slot="header">YouTube playlists</div>
+  <div slot="body"
+       style="max-height: 400px; overflow-y: auto">
     <em *ngIf="!playlists || playlists.length == 0">Няма заредени плейлисти</em>
-    <div *ngFor="let playlist of playlists" style="cursor: pointer;" (click)="selectPlaylist(playlist)">
+    <div *ngFor="let playlist of playlists"
+         class="action"
+         (click)="selectPlaylist(playlist)">
       {{playlist.snippet.title}} ({{playlist.contentDetails.itemCount}})
     </div>
   </div>

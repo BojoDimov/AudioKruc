@@ -1,9 +1,12 @@
 <widget *ngIf="playlist">
   <div slot="header">{{playlist.snippet.title}}</div>
-  <div slot="body">
-    <div *ngFor="let playlistItem of playlistItems" style="display: flex">
+  <div slot="body"
+       style="max-height: 600px; overflow-y: auto;">
+    <div *ngFor="let playlistItem of playlistItems"
+         style="display: flex; margin-top: 10px;">
       <img src="{{playlistItem.snippet.thumbnails.default.url}}" />
-      {{playlistItem.snippet.title}}
+      <span class="action"
+            style="align-self: center;margin-left: 10px;">{{playlistItem.snippet.title}}</span>
     </div>
   </div>
 </widget>

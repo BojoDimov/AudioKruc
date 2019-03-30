@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { GoogleApiService } from './gapi.provider';
+import { SessionService } from './session.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,5 @@ import { GoogleApiService } from './gapi.provider';
 export class AppComponent {
   title = 'AudioKruc';
 
-  constructor(service: GoogleApiService) {
-    console.log(service, service.auth.isSignedIn.get());
-  }
+  constructor(public session: SessionService) { }
 }

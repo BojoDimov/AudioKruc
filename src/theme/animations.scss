@@ -1,9 +1,14 @@
-@mixin hover($color) {
+@mixin hover($color, $percentage) {
   color: $color;
   transition: color .3s ease-out;
 
   &:hover {
-    color: darken($color, 10%);
+    @if $percentage < 0% {
+      color: lighten($color, (-1) * $percentage);
+    }
+    @else {
+      color: darken($color, $percentage)
+    }
   }
 }
 
@@ -14,7 +19,7 @@
 }
 
 .fade-in {
-  animation: fade-in-animation 1s ease-in-out;
+  animation: fade-in-animation .5s ease-in-out;
 }
 
 @keyframes fade-in-animation {

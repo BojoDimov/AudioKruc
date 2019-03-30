@@ -7,12 +7,12 @@
   color: $secondaryColor;
   margin: $large-spacing $spacing;
   padding: $large-spacing;
-  background-color: white;
+  background-color: $darkColor;
   border-radius: 5px;
   box-shadow: 5px 5px 5px lighten($secondaryColor, 30%);
 
   .header {
-    @include hover($primaryColor);
+    @include hover($primaryColor, -10%);
 
     color: $primaryColor;
     cursor: pointer;
@@ -23,24 +23,10 @@
 
   .body {
     padding-top: $spacing;
-    max-height: 0;
-    transition: max-height .25s ease-in-out;
-    overflow: hidden;
-  }
 
-  &.open {
-    .body {
-      max-height: 500px;
-      transition: max-height .5s ease-in-out;
-
-      div {
-        max-height: 100%;
-        overflow-y: auto;
-      }
+    .action {
+      @include hover($secondaryColor, -20%);
+      cursor: pointer;
     }
-  }
-
-  .footer {
-    //background-color: $bg-color;
   }
 }

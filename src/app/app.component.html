@@ -1,17 +1,25 @@
-<div class="widget-container-left">
+<div id="buttons">
   <settings></settings>
+</div>
+
+<div id="search">
+  <input [formControl]="session.SearchApi.formControl"
+         (keydown.enter)="session.SearchApi.search()" />
+  <div id="search-icon">
+    <fa-icon [icon]="['fas', 'search']"
+             (click)="session.SearchApi.search()">
+    </fa-icon>
+  </div>
+</div>
+
+<div id="left-sidebar">
   <youtube-playlists></youtube-playlists>
 </div>
 
-<div class="widget-container-center">
-  <widget>
-    <div slot="wrapper">
-      <input type="search" />
-    </div>
-  </widget>
-
+<div id="main">
   <playlist-view></playlist-view>
 </div>
 
-<div class="widget-container-right">
+<div id="footer">
+  AudioKruc™ | Bozhidar Dimov 2019 | All rights unreserved
 </div>

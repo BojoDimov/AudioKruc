@@ -2,7 +2,7 @@
   <div class="header" (click)="open=!open">
     <ng-content select="[slot=header]"></ng-content>
   </div>
-  <div class="body">
+  <div class="body" *ngIf="open">
     <ng-content select="[slot=body]"></ng-content>
   </div>
   <div class="wrapper">

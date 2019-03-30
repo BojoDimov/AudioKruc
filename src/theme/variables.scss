@@ -1,6 +1,8 @@
 // Colors
-$primaryColor: rgb(147, 150, 4);
-$secondaryColor: rgb(151, 95, 25); 
+$primaryColorOld: rgb(147, 150, 4);
+$primaryColor: lighten(rgb(147, 150, 4), 10%);
+$secondaryColor: rgb(226, 129, 9); 
+$darkColor: rgb(41, 39, 39);
 $text-color: rgb(60, 60, 60);
 $background: whitesmoke;
 

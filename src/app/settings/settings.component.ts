@@ -17,12 +17,14 @@ export class SettingsComponent {
     session.GoogleApi.auth.isSignedIn.listen(signedIn => this.isSignedIn = signedIn);
   }
 
-  async signIn() {
-    const user = await this.session.GoogleApi.auth.signIn();
-    console.log('Signed in user is ', user);
+  async youtubeSign() {
+    if (!this.session.GoogleApi.auth.isSignedIn.get())
+      await this.session.GoogleApi.auth.signIn();
+    else
+      await this.session.GoogleApi.auth.signOut();
   }
 
-  signOut() {
-    this.session.GoogleApi.auth.signOut();
+  async spotifySign() {
+    alert("Spotify login is not implemented!");
   }
 }

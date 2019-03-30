@@ -1,6 +1,12 @@
-<widget>
-  <div slot="wrapper">
-    <fa-icon class="pointer" *ngIf="!isSignedIn" [icon]="['fas', 'power-off']" (click)="signIn()"></fa-icon>
-    <fa-icon class="pointer" *ngIf="isSignedIn" [icon]="['fas', 'sign-out-alt']" (click)="signOut()"></fa-icon>
-  </div>
-</widget>
+<div>
+  <fa-icon class="pointer"
+           style="color: red; font-size: 2em"
+           [icon]="['fab', 'youtube']"
+           (click)="youtubeSign()">
+  </fa-icon>
+  <fa-icon class="pointer"
+           style="color: #1dd15d; font-size: 2em"
+           [icon]="['fab', 'spotify']"
+           (click)="spotifySign()">
+  </fa-icon>
+</div>
