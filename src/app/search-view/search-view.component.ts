@@ -12,4 +12,8 @@ export class SearchViewComponent {
   }
 
   searchResult: YoutubeSearchResult;
+
+  loadMore() {
+    this.session.SearchApi.loadMore(this.searchResult);
+  }
 }

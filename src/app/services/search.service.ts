@@ -20,4 +20,16 @@ export class SearchService {
     const result = await this.session.GoogleApi.buildApiRequest<YoutubeSearchResult>('GET', '/youtube/v3/search', options);
     this.searchResults.emit(result);
   }
+
+  async loadMore(current: YoutubeSearchResult) {
+    const options = {
+      maxResults: 25,
+      part: 'snippet',
+      pageToken: current.nextPageToken,
+      type: 'video'
+    };
+    const result = await this.session.GoogleApi.buildApiRequest<YoutubeSearchResult>('GET', '/youtube/v3/search', options);
+    current.items.push(...result.items);
+    current.nextPageToken = result.nextPageToken;
+  }
 }

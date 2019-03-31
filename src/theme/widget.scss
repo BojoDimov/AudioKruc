@@ -39,4 +39,15 @@
       cursor: pointer;
     }
   }
+
+  .footer {
+    display: flex;
+    justify-content: center;
+
+    .load-more {
+      @include hover($secondaryColor, -20%);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
 }
