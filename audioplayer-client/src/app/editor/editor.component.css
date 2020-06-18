@@ -1,0 +1,15 @@
+:host {
+  height: 600px;
+  width: 600px;
+  border: 3px solid #2b7c2b;
+  border-radius: 8px;
+  background-color: whitesmoke;
+  overflow-y: scroll;
+}
+
+:host > form > div {
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}

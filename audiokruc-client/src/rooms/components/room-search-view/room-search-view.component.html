@@ -1,0 +1,24 @@
+<div class="clr-row clr-justify-content-between clr-align-items-center room-row"
+     [routerLink]="[room.id]">
+  <div class="clr-col-6">
+    <h3>
+      {{room.name}}
+    </h3>
+    <span class="p2">
+      {{room.description}}
+    </span>
+  </div>
+  <div class="clr-col-2">
+    <div class="clr-row">
+      <div class="clr-col-6">
+        <clr-icon shape="music-note"></clr-icon>
+        {{room.songsInQueue}}
+      </div>
+      <div class="clr-col-6">
+        <clr-icon shape="users"
+                  style="margin-left: 0.5rem;"></clr-icon>
+        {{room.liveListeners}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="clr-row clr-justify-content-center"
+     style="margin-bottom: 2rem;">
+  <div class="clr-col-12 clr-col-sm-8 clr-col-lg-6">
+    <div>
+      <ak-song-add [roomId]="roomId"
+                   (songAdded)="getData()">
+        <button #trigger
+                class="btn btn-outline">Add song</button>
+      </ak-song-add>
+      <button [routerLink]="['/rooms']"
+              class="btn btn-link">
+        back
+      </button>
+    </div>
+    <h2>
+      {{room.name}}
+      <span style="font-size: .75rem;color: var(--ak-text-color);">[{{room.genre}}]</span>
+    </h2>
+    <div>{{room.description}}</div>
+  </div>
+</div>
+
+<div style="border: 1px solid lightblue;">
+  <ak-audio-player [roomId]="roomId"></ak-audio-player>
+</div>
+
+<ng-container *ngFor="let song of room.songs;let i = index">
+  <div class="clr-row clr-justify-content-center">
+    <span class="clr-col-12 clr-col-sm-8 clr-col-lg-6"
+          [class.accent]="i==3">
+      {{song.title}}
+    </span>
+  </div>
+</ng-container>

@@ -1,0 +1,49 @@
+<ng-content></ng-content>
+
+<clr-modal [(clrModalOpen)]="modalOpened">
+  <h3 class="modal-title">Create a new room</h3>
+  <div class="modal-body">
+    <div>
+      <label for="room-name"
+             class="clr-control-label">Name</label>
+      <input id="room-name"
+             class="clr-col"
+             type="text"
+             placeholder="Enter room name..."
+             name="room-name"
+             [(ngModel)]="model.name" />
+    </div>
+
+
+    <div style="margin-top: 1rem">
+      <label for="room-description"
+             class="clr-control-label">Description</label>
+
+      <input id="room-description"
+             class="clr-col"
+             type="text"
+             name="room-description"
+             placeholder="Enter room description..."
+             [(ngModel)]="model.description" />
+    </div>
+
+    <div style="margin-top: 1rem; margin-bottom: .5rem;">
+      <label for="room-genre"
+             class="clr-control-label">Genre</label>
+      <input id="room-genre"
+             class="clr-col"
+             type="text"
+             name="room-genre"
+             placeholder="Enter room genre..."
+             [(ngModel)]="model.genre" />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+            class="btn btn-outline"
+            (click)="modalOpened = false">Cancel</button>
+    <button type="button"
+            class="btn btn-primary"
+            (click)="save()">Ok</button>
+  </div>
+</clr-modal>

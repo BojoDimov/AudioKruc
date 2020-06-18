@@ -1,0 +1,22 @@
+{
+  "name": "streaming-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@esm-bundle/rxjs": "^6.5.5-fix.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "moment": "^2.26.0",
+    "node-media-server": "^2.1.9",
+    "webm-byte-stream": "^0.1.4",
+    "ws": "^7.3.0",
+    "ytdl-core": "^2.1.7"
+  }
+}

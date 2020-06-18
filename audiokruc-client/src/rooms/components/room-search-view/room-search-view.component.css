@@ -1,0 +1,8 @@
+.room-row {
+  border-radius: 3px;
+}
+
+.room-row:hover {
+  background-color: var(--ak-background-highlight);
+  cursor: pointer;
+}

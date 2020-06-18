@@ -1,0 +1,22 @@
+#searchInputContainer {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+#searchInputContainer > clr-icon {
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+#searchInput {
+  border: none;
+  border-bottom: 1px solid var(--ak-primary-color);
+  background-color: var(--ak-background);
+  font-size: 1rem;
+  outline: none;
+}
+
+#searchInput:focus {
+  border-color: var(--ak-secondary-color);
+}

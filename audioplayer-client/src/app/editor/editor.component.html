@@ -1,0 +1,92 @@
+<form #paramsForm="ngForm"
+      style="padding: 16px;display: fled; flex-direction: column;">
+  <pre>{{params | json}}</pre>
+
+  <h3>General</h3>
+
+  <div>
+    <label for="resolution">Resolution (# points)</label>
+    <input name="resolution"
+           type="range"
+           min="360"
+           max="3600"
+           step="1"
+           [(ngModel)]="params.resolution" />
+  </div>
+
+  <h3>For the circle</h3>
+
+  <div>
+    <h4 style="margin: 0;">Center</h4>
+    <div style="display: flex; justify-content: space-between;">
+      <div style="width: 100%;display: flex; flex-direction: column;">
+        <label for="center.x">x</label>
+        <input name="center.x"
+               type="number"
+               min="0"
+               max="800"
+               [(ngModel)]="params.center.x" />
+      </div>
+      <div style="width: 100%;display: flex; flex-direction: column;">
+        <label for="center.y">y</label>
+        <input name="center.y"
+               type="number"
+               min="0"
+               max="800"
+               [(ngModel)]="params.center.y" />
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="radius">radius</label>
+    <input name="radius"
+           type="range"
+           min="1"
+           max="300"
+           step="1"
+           [(ngModel)]="params.radius" />
+  </div>
+
+  <div>
+    <label for="delta">delta</label>
+    <input name="delta"
+           type="range"
+           min="0"
+           max="100"
+           step="1"
+           [(ngModel)]="params.delta" />
+  </div>
+
+  <h3>For the sine wave</h3>
+
+  <div>
+    <label for="k">k</label>
+    <input name="k"
+           type="range"
+           min="0"
+           max="100"
+           step="0.1"
+           [(ngModel)]="params.k" />
+  </div>
+
+  <div>
+    <label for="w">w</label>
+    <input name="w"
+           type="range"
+           min="0"
+           max="100"
+           step="0.1"
+           [(ngModel)]="params.w" />
+  </div>
+
+  <div>
+    <label for="phase">phase (in rads)</label>
+    <input name="k"
+           type="range"
+           min="0"
+           max="{{2 * 3.14}}"
+           step="{{3.14 / 18}}"
+           [(ngModel)]="params.phase" />
+  </div>
+</form>

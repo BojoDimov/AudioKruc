@@ -1,0 +1,25 @@
+<ng-content></ng-content>
+
+<clr-modal [(clrModalOpen)]="modalOpened">
+  <h3 class="modal-title">Add song from youtube</h3>
+  <div class="modal-body">
+    <div style="margin-bottom: .5rem;">
+      <label for="song-url"
+             class="clr-control-label">Song url</label>
+      <input id="song-url"
+             class="clr-col"
+             type="text"
+             placeholder="Enter song url..."
+             name="song-url"
+             [(ngModel)]="url" />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+            class="btn btn-outline"
+            (click)="modalOpened = false">Cancel</button>
+    <button type="button"
+            class="btn btn-primary"
+            (click)="add()">Ok</button>
+  </div>
+</clr-modal>

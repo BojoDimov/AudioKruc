@@ -1,0 +1,95 @@
+/* :root {
+  --ak-background-highlight: #C9CCC2;
+  --ak-background: rgb(214, 214, 214);
+  --ak-background-header: #C9CCC2;
+
+  --ak-text-color: rgb(44, 44, 44);
+  --ak-primary-color: rgb(125, 163, 42);
+  --ak-secondary-color: #c58714;
+} */
+
+:root {
+  --ak-background-highlight: #444444;
+  --ak-background: #292928;
+  --ak-background-header: #1f1f1e;
+
+  --ak-text-color: white;
+  --ak-primary-color: hsl(80,86%,67%);
+  --ak-primary-color-darker: hsl(80,49%,52%);
+  --ak-secondary-color: hsl(29,100%,69%);
+}
+
+:root {
+  --clr-header-3-bg-color: var(--ak-background-header);
+  --clr-global-app-background: var(--ak-background);
+  --clr-global-selection-color: var(--ak-background-highlight);
+  --clr-global-font-color: var(--ak-text-color);
+  --clr-h1-color: var(--ak-primary-color);
+  --clr-h2-color: var(--ak-primary-color);
+  --clr-h3-color: var(--ak-primary-color);
+  --clr-h4-color: var(--ak-text-color);
+  --clr-h5-color: var(--ak-text-color);
+  --clr-h6-color: var(--ak-text-color);
+  --clr-btn-primary-color: var(--ak-background);
+  --clr-btn-primary-hover-color: var(--ak-background);
+  --clr-btn-primary-bg-color: var(--ak-primary-color);
+  --clr-btn-primary-hover-bg-color: var(--ak-primary-color-darker);
+  --clr-btn-primary-border-color: var(--ak-primary-color);
+  --clr-btn-default-outline-color: var(--ak-primary-color);
+  --clr-btn-default-outline-hover-color: var(--ak-primary-color);
+  --clr-btn-default-outline-hover-bg-color: var(--ak-background-highlight);
+  --clr-btn-link-color: var(--ak-primary-color);
+  --clr-btn-link-hover-color: var(--ak-primary-color-darker);
+  --clr-close-color--hover: var(--ak-primary-color);
+
+  --clr-modal-bg-color: var(--ak-background);
+
+  --clr-forms-label-color: var(--ak-text-color);
+  --clr-forms-textarea-background-color: var(--ak-background);
+}
+
+*:focus {
+  outline: none;
+}
+
+button {
+  box-shadow: none !important;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0.1rem 0.1rem var(--ak-primary-color) !important;
+}
+
+html,body,p,div,input {
+  color: var(--ak-text-color);
+}
+svg {
+  fill: currentColor;
+}
+
+.primary-color {
+  color: var(--ak-primary-color);
+}
+
+.accent {
+  color: var(--ak-secondary-color);
+}
+
+input, 
+textarea,
+.clr-textarea {
+  padding: .25rem;
+  background-color: var(--ak-background);
+  border: none;
+  border-bottom: 1px solid var(--ak-primary-color);
+  color: var(--ak-text-color);
+  box-shadow: none;
+  transition: border-color .1s ease-in;
+}
+
+input:focus, 
+textarea:focus,
+.clr-textarea:focus {
+  border-color: var(--ak-secondary-color);
+} 
