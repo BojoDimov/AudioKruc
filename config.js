@@ -4,6 +4,9 @@ const config = {
   },
   'streaming-service': {
     port: 10002
+  },
+  'playlists-service': {
+    port: 10003
   }
 };
 export default config;

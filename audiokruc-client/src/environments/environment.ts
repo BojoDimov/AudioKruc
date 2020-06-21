@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   roomsServiceApi: 'http://localhost:10001',
-  roomsServiceWs: 'ws://localhost:10001'
+  roomsServiceWs: 'ws://localhost:10001',
+  playlistsService: 'localhost:10003'
 };
 
 /*

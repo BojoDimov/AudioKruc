@@ -1,0 +1,19 @@
+{
+  "name": "playlist-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "fluent-ffmpeg": "^2.1.2",
+    "webm-byte-stream": "^0.1.4",
+    "ws": "^7.3.0"
+  }
+}
