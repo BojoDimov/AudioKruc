@@ -1,0 +1,17 @@
+.ak-landing-page-btn {
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+
+.ak-hover-effect {
+  transform: translate(0);
+  transition: transform .25s ease-in-out;
+  transition-delay: 75ms;
+}
+
+.ak-hover-effect:hover {
+  transform: translate3d(6px,-6px,0);
+  box-shadow: -3px 3px var(--ak-primary-color) !important;
+}

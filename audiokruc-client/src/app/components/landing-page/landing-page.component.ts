@@ -3,7 +3,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 @Component({
   selector: 'ak-landing-page',
   templateUrl: './landing-page.component.html',
-  styles: []
+  styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit {
 
@@ -13,7 +13,6 @@ export class LandingPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('Instantiating landing page')
   }
 
 }

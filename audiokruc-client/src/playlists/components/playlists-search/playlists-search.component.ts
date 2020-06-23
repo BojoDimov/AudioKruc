@@ -24,7 +24,6 @@ export class PlaylistsSearchComponent implements OnInit {
 
   getData() {
     const query = `searchTerm=${this.searchTerm}`;
-    console.log('Calling GET /playlists')
     this.http.get<any[]>(`http://${environment.playlistsService}/playlists?${query}`)
       .subscribe(playlists => this.playlists = playlists);
   }

@@ -19,29 +19,24 @@ export class AudioPlayerComponent implements AfterViewInit, OnDestroy {
 
   connection: AudioSocket;
   mse: MseWrapper;
-  graph: AudioGraph;
+  graph: AudioGraph = new AudioGraph();
 
   ngAfterViewInit() {
     this.audioElement = document.createElement('audio');
-    this.audioElement.setAttribute('style', 'display: none');
 
     this.connection = new AudioSocket(this.src);
 
     this.mse = new MseWrapper(this.mimeType, this.connection.arrayBuffer$);
     this.audioElement.src = this.mse.createObjectURL();
 
-    this.graph = new AudioGraph();
     this.graph.connect(this.audioElement);
 
-    document.body.appendChild(this.audioElement);
-  }
-
-  connect() {
-    this.connection.connect();
+    //document.body.appendChild(this.audioElement);
   }
 
   play() {
-
+    this.connection.connect();
+    this.audioElement.play();
   }
 
   pause() {

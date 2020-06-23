@@ -27,10 +27,15 @@ export class MseWrapper {
     this.mimeType = mimeType;
 
     this.bufferSubscription = source$.subscribe(chunk => {
-      if (this.internalBuffer != null) {
+      if (this.internalBuffer != null || this.mediaSourceBuffer.updating) {
         this.internalBuffer = concatBuffers(this.internalBuffer, chunk);
       } else {
         this.internalBuffer = chunk;
+      }
+
+      if (!this.mediaSourceBuffer.updating) {
+        this.mediaSourceBuffer.appendBuffer(this.internalBuffer);
+        this.internalBuffer = null;
       }
     });
 
@@ -61,5 +66,5 @@ export class MseWrapper {
 }
 
 function concatBuffers(source1: any, source2: any) {
-  return new Uint8Array([...source1, ...source2]).buffer;
+  return new Uint8Array([...new Uint8Array(source1), ...new Uint8Array(source2)]).buffer;
 }

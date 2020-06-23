@@ -16,7 +16,7 @@ export class PlaylistViewComponent implements OnInit {
   @ViewChild(AudioPlayerComponent)
   audioPlayer: AudioPlayerComponent;
 
-  playlist: any;
+  playlist: any = {};
   audioPlayerSrc: string;
 
   constructor(
@@ -33,10 +33,6 @@ export class PlaylistViewComponent implements OnInit {
 
   ngOnInit(): void {
 
-  }
-
-  play() {
-    this.audioPlayer.connect();
   }
 
   getData(playlistId: number | string) {

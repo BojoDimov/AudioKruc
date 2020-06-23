@@ -1,1 +1,17 @@
-<p>audio-player works!</p>
+<div>
+
+</div>
+<ak-bars-visualizer *ngIf="graph && graph.analyser$"
+                    [audioData]="graph.analyser$"></ak-bars-visualizer>
+<div>
+  <button (click)="play()">
+    Play/Pause
+  </button>
+
+  <button>
+    Prev
+  </button>
+  <button>
+    Next
+  </button>
+</div>

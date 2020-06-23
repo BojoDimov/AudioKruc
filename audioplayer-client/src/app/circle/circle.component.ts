@@ -40,14 +40,3 @@ export class CircleComponent implements AfterViewInit {
     }
   }
 }
-
-
-
-// let noisePower = 40;
-
-// let points = range(1, pointsCount + 1)
-//   .map(e => [
-//     center[0] + r * Math.cos(2 * Math.PI * e / pointsCount) + Math.random() * noisePower,
-//     center[1] + r * Math.sin(2 * Math.PI * e / pointsCount) + Math.random() * noisePower
-//   ]);
-

@@ -7,12 +7,12 @@ export class AudioGraph {
   private gain: GainNode;
   private analyser: AnalyserNode;
 
-  fftSize = 512;
+  fftSize = 64;
   analyserFps = 24;
 
   analyser$ = timer(0, 1000 / this.analyserFps)
     .pipe(
-      filter(_ => this.ctx.state === 'running'),
+      filter(_ => this.ctx && this.ctx.state === 'running'),
       map(_ => this.getAnalyserData())
     );
 
@@ -26,15 +26,25 @@ export class AudioGraph {
 
   connect(element: HTMLAudioElement) {
     this.source = this.ctx.createMediaElementSource(element);
+
     this.source
       .connect(this.analyser)
       .connect(this.gain)
       .connect(this.ctx.destination);
+    this.ctx.resume();
   }
 
-  private getAnalyserData() {
-    let data = new Float32Array(this.analyser.frequencyBinCount);
-    this.analyser.getFloatTimeDomainData(data);
-    return data;
+  private getAnalyserData(): number[] {
+    let data = new Uint8Array(this.analyser.frequencyBinCount);
+    let result = new Array<number>(this.analyser.frequencyBinCount);
+
+    this.analyser.getByteTimeDomainData(data);
+    //this.analyser.getByteFrequencyData(data);
+
+    let lowerBound = Math.round(20 / 100 * data.length);
+    let upperBound = Math.round(data.length - 40 / 100 * data.length);
+
+    return Array.prototype.slice.call(data, 0).map((freq: number) => freq / 255);
+    //return Array.prototype.slice.call(data, 0).map((freq: number) => freq / 255);
   }
 }

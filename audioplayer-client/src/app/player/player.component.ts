@@ -8,8 +8,8 @@ import { tap, filter, map, publish } from 'rxjs/operators';
   styleUrls: ['./player.component.css']
 })
 export class PlayerComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('audio')
-  audioElement: ElementRef<HTMLAudioElement>;
+  // @ViewChild('audio')
+  // audioElement: ElementRef<HTMLAudioElement>;
 
   @Input('audioDataChannel')
   audioDataChannel: Subject<any>;
@@ -46,11 +46,17 @@ export class PlayerComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mediaSource = new MediaSource();
     this.audioCtx = new (window.AudioContext || (<any>window).webkitAudioContext)();
 
-    this.audioElement.nativeElement.src = URL.createObjectURL(this.mediaSource);
-    this.mediaSource.addEventListener('sourceopen', (ev) => this.loadMedia());
+    let audioElement = document.createElement('audio');
+    audioElement.src = URL.createObjectURL(this.mediaSource);
+    audioElement.play();
+    //document.body.appendChild(audioElement);
+
+
+    //this.audioElement.nativeElement.src = URL.createObjectURL(this.mediaSource);
+    //this.mediaSource.addEventListener('sourceopen', (ev) => this.loadMedia());
 
     if (this.audioCtx) {
-      this.source = this.audioCtx.createMediaElementSource(this.audioElement.nativeElement);
+      this.source = this.audioCtx.createMediaElementSource(audioElement);
       this.analyzer = this.audioCtx.createAnalyser();
       this.analyzer.fftSize = this.size;
       this.analyzer.smoothingTimeConstant = 1;
@@ -65,19 +71,18 @@ export class PlayerComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mediaSourceBuffer.mode = 'sequence';
 
     this.audioCtx.resume();
-    this.audioElement.nativeElement.play();
+    //this.audioElement.nativeElement.play();
 
     let buffer = null;
 
     this.mediaSourceBuffer.addEventListener('updateend', () => {
       if (buffer != null) {
-        console.log('appending to source buffer');
         this.mediaSourceBuffer.appendBuffer(buffer);
         buffer = null;
       }
     });
 
-    this.socket = new WebSocket('ws://localhost:10002/test-room');
+    this.socket = new WebSocket('ws://localhost:10003/4');
     this.socket.onmessage = async (ev) => {
       let segment = await ev.data['arrayBuffer']();
       if (buffer != null) {
@@ -87,7 +92,6 @@ export class PlayerComponent implements OnInit, AfterViewInit, OnDestroy {
       }
 
       if (!this.mediaSourceBuffer.updating) {
-        console.log('appending to source buffer');
         this.mediaSourceBuffer.appendBuffer(buffer);
         buffer = null;
       }

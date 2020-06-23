@@ -58,10 +58,8 @@ webSocketServer.on('connection', (socket, request) => {
   const playlist = playlists.find(e => e.id == id);
   if (playlist != null) {
     const player = new PlaylistPlayer(socket, playlist);
-    player.play();
+    player.play(3);
   }
-
-  // Starts playing the selected playlist
 });
 
 function getPlaylistId(url) {

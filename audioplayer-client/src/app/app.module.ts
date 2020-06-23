@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { CircleComponent } from './circle/circle.component';
 import { EditorComponent } from './editor/editor.component';
 import { PlayerComponent } from './player/player.component';
+import { BarsComponent } from './bars/bars.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CircleComponent,
     EditorComponent,
-    PlayerComponent
+    PlayerComponent,
+    BarsComponent
   ],
   imports: [
     BrowserModule,
