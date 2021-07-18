@@ -1,0 +1,32 @@
+<div>
+  <div>
+    <ak-yt-logo></ak-yt-logo>
+    <div>
+      <button *ngIf="!isLoggedInYt"
+              (click)="loginYt()">Login</button>
+      <button *ngIf="isLoggedInYt"
+              (click)="logoutYt()">Logout</button>
+      <button (click)="getPlaylistsYt()">Get Playlists</button>
+    </div>
+
+    <div id="yt-playlist-container"
+         [@listAnimation]="playlists.length">
+      <h3>Playlists</h3>
+      <div *ngFor="let playlist of playlists">
+        <ak-song-tile [songData]="playlist"></ak-song-tile>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div>
+    <h3 style="color: #1db954; font-weight: bold;">
+      SPOTIFY
+    </h3>
+    <div>
+      <button>Login</button>
+      <button>Get Playlists</button>
+    </div>
+  </div>
+</div>

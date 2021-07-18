@@ -4,14 +4,19 @@
 <ak-bars-visualizer *ngIf="graph && graph.analyser$"
                     [audioData]="graph.analyser$"></ak-bars-visualizer>
 <div>
-  <button (click)="play()">
-    Play/Pause
+  <button *ngIf="state == PlayerState.stopped || state == PlayerState.paused"
+          class="btn btn-outline"
+          (click)="play()">
+    <clr-icon shape="play"></clr-icon>
   </button>
 
-  <button>
-    Prev
+  <button *ngIf="state == PlayerState.playing"
+          class="btn btn-outline"
+          (click)="pause()">
+    <clr-icon shape="pause"></clr-icon>
   </button>
-  <button>
-    Next
+
+  <button class="btn btn-outline">
+    <clr-icon shape="volume-up"></clr-icon>
   </button>
 </div>

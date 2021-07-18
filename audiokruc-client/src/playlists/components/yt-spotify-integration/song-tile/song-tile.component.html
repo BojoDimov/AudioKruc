@@ -1,0 +1,16 @@
+<style>
+  .song-tile-root {
+    border-radius: 8px;
+    box-shadow: 5px 6px 8px 0px #404040;
+    margin: 24px;
+    overflow: hidden;
+  }
+
+  .song-tile-root img {
+    border-radius: 8px;
+  }
+</style>
+
+<div class="song-tile-root">
+  <img [src]="songData.snippet.thumbnails['medium'].url" />
+</div>

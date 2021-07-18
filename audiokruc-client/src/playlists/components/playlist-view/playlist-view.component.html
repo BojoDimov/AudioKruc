@@ -1,6 +1,6 @@
 <div class="clr-row clr-justify-content-center">
   <div class="clr-col-12 clr-col-sm-8 clr-col-lg-6">
-
+    <h2>{{playlist.name}}</h2>
     <ak-audio-player [src]="audioPlayerSrc"></ak-audio-player>
     <!-- <div>
       <button (click)="play()">
@@ -8,7 +8,7 @@
       </button>
     </div> -->
 
-    <h2>{{playlist.name}}</h2>
+
 
     <h6 *ngFor="let song of playlist.songs">
       {{song.name}}

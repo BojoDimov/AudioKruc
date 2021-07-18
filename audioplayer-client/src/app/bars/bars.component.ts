@@ -14,7 +14,7 @@ export class BarsComponent implements AfterViewInit {
   canvas: ElementRef<HTMLCanvasElement>;
   ctx: CanvasRenderingContext2D = null;
 
-  spacerWidth: number = 2;
+  spacerWidth: number = ;
   barCount: number = 50;
   maxHeightPercentage = 0.8;
   minHeightPercentage = 0.1;
