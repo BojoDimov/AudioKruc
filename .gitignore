@@ -42,3 +42,12 @@ testem.log
 Thumbs.db
 
 Data/
+
+Node-Media-Server/
+audiokruc-client/
+audioplayer-client/
+playlist-service/
+rooms-service/
+shared/
+streaming-service/
+ytdl-ffmpeg/
