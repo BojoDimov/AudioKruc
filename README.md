@@ -1,3 +1,6 @@
+# TODO
+1. https://robertcooper.me/post/using-eslint-and-prettier-in-a-typescript-project
+
 # AudioKruc 
 Application for listening music online.
 
