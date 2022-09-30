@@ -51,3 +51,7 @@ rooms-service/
 shared/
 streaming-service/
 ytdl-ffmpeg/
+
+# env
+.env
+.env
