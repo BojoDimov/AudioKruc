@@ -77,6 +77,7 @@ async function downloadSongs() {
       allSongs.push(
         ...tracks
           .filter((t) => t.track)
+          // TODO: I want to have songs without images, it is importanter to see them
           .filter((t) => t.track.album.images.length > 0)
           .map((song) => ({
             spotifyId: song.track.id,
